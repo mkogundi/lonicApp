@@ -1,0 +1,35 @@
+
+<ion-content style="background: url('assets/backgroundRed.jpg') no-repeat">
+    <ion-slides pager (ionSlideDidChange)="slideChanged()" (ionSlideDrag)="slideMoved()">
+      <ion-slide>
+        <div class="diag">
+          <ion-icon ios="ios-analytics" md="md-analytics" color="light" [@bounce]='state' (@bounce.done)="animationDone()"></ion-icon>
+        </div>
+        <div [@bounce]='state'>
+          <h2 color="light">Track your routine</h2>
+          <p color="light">whether it's sets, reps, weight used, you can track it all with our intuitive interface.</p>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="diag">
+          <ion-icon ios="ios-trophy" md="md-trophy" color="light" [@bounce]='state'></ion-icon>
+        </div>
+        <div [@bounce]='state'>
+          <h2 color="light">set personal goals</h2>
+          <p color="light">we're all in the gym for a reason: goals. set goals for diet and fitness.</p>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="diag">
+          <ion-icon ios="ios-chatboxes" md="md-chatboxes" color="light" [@bounce]='state'></ion-icon>
+        </div>
+        <div [@bounce]='state'>
+          <h2 color="light">chat with others</h2>
+          <p color="light">inspire and help each other reach fitness and diet goals.</p>
+        </div>
+      </ion-slide>
+    </ion-slides>
+    <button ion-button round (click)="skip()" id="skip">Create an Account</button> 
+    <button ion-button round (click)="showFingerPrintDailog()" id="accountSetup">Already a User SignIn</button>
+  </ion-content>
+  

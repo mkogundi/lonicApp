@@ -1,0 +1,56 @@
+.diag {
+    position:absolute;
+    z-index:1;
+    width:100%;
+    top: 0;
+    height: 66%;
+}
+
+ion-icon {
+    margin-top:40%;
+    font-size:7em;
+}
+
+h2 {
+    margin-top:25% !important;
+    font-weight:bold;
+    font-size:1em;
+    color: azure;
+}
+
+p {
+    width:80%;
+    display:block;
+    margin: 0 auto;
+    font-size:.9em;
+    color: azure;
+}
+
+.swiper-pagination-bullet-active {
+    background:#f4f4f4;
+}
+
+.swiper-pagination {
+    bottom: 25% !important;
+}
+
+#skip {
+    position:absolute;
+    bottom: 17%;
+    width:75%;
+    text-align: center;
+    cursor: pointer;
+    z-index: 5;
+    margin:0 13%
+}
+
+#accountSetup{
+    position: absolute;
+    bottom: 10%;
+    margin: 0 15%;
+    background: none;
+    color:#fff;
+    cursor: pointer;
+    z-index: 5;
+    width:70%;
+}

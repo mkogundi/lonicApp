@@ -1,4 +1,4 @@
-import { Component,NgZone, ViewChild, Renderer2} from '@angular/core';
+import { Component,NgZone, ViewChild} from '@angular/core';
 import { NavController,Content } from 'ionic-angular';
 
 import { TextToSpeech } from '@ionic-native/text-to-speech';

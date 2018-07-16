@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { IntroPage } from '../pages/Intro/intro';
 
 declare var window;
 
@@ -15,7 +16,7 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ListPage;
+  rootPage: any = IntroPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -26,14 +27,14 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-       window["ApiAIPlugin"].init(
+      /*  window["ApiAIPlugin"].init(
         {
             clientAccessToken: "697a929cd7574ca49cff4da2a43c6025", // insert your client access key here
             lang: "en" // set lang tag from list of supported languages
         }, 
         function(result) {  },
         function(error) {  }
-      ); 
+      );  */
     });
     
   // used for an example of ngFor and navigation
