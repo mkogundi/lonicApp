@@ -1,4 +1,4 @@
-import { Component,NgZone, ViewChild, ElementRef, Renderer2, AfterViewInit} from '@angular/core';
+import { Component,NgZone, ViewChild, Renderer2} from '@angular/core';
 import { NavController,Content } from 'ionic-angular';
 
 import { TextToSpeech } from '@ionic-native/text-to-speech';
@@ -9,32 +9,21 @@ declare var window;
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements AfterViewInit {
+export class HomePage{
 
   messages: any[]= [];
   text: string = "";
-  api: string = "";
   @ViewChild(Content) content: Content;
- // @ViewChild('addMessage') addMessage:ElementRef;
-  constructor(public navCtrl: NavController,public ngZone: NgZone,public tts:TextToSpeech,private _renderer: Renderer2) {
+  constructor(public navCtrl: NavController,public ngZone: NgZone,public tts:TextToSpeech) {
 
-    /* this.messages.push({
-      text: "Hi, how can i help you?",
+     this.messages.push({
+      text: "<h3>Hi, how can i help you?</h3>",
       sender: "api"
-    }); */
-     this.api = " <ion-avatar item-left> + <img src='assets/apiai.png'> +</ion-avatar> + <div class='bubble me'>" + "HI, How are you" + "</div>";
+    }); 
     
   }
 
-  @ViewChild("addMessage", {read: ElementRef}) addMessage: ElementRef;
-
-  ngAfterViewInit(): void {
-      // outputs `I am span`
-      this._renderer.appendChild(this.addMessage.nativeElement, this.api);
-      this._renderer.
-
-      console.log(this.addMessage.nativeElement);
-  }
+  
   sendText(){
     let input = this.text;
 

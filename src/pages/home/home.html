@@ -11,19 +11,17 @@
 
 <ion-content padding>
   <ion-list no-lines class="chat-list" text-wrap>
-    <ion-item #addMessage class="chat-item">
-     <!--  <ion-avatar item-left *ngIf="message.sender == 'api'">
+    <ion-item #addMessage class="chat-item" *ngFor="let message of messages">
+      <ion-avatar item-left *ngIf="message.sender == 'api'">
         <img src="assets/apiai.png" alt="">
       </ion-avatar>
       <ion-avatar item-right *ngIf="message.sender == 'me'">
         <img src="assets/ionic.png" alt="">
       </ion-avatar>
-      <div *ngIf="message.sender == 'api'" class="bubble me">
-        {{message.text}}
+      <div *ngIf="message.sender == 'api'" class="bubble me" [innerHTML]="message.text">
       </div>
-      <div *ngIf="message.sender == 'me'" class="bubble you">
-        {{message.text}}
-      </div> -->
+      <div *ngIf="message.sender == 'me'" class="bubble you" [innerHTML]="message.text">
+      </div> 
     </ion-item>
   </ion-list>
 </ion-content>
@@ -41,3 +39,4 @@
     </ion-item>
   </ion-toolbar>
 </ion-footer>
+
