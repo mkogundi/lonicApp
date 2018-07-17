@@ -6,8 +6,8 @@
           <ion-icon ios="ios-analytics" md="md-analytics" color="light" [@bounce]='state' (@bounce.done)="animationDone()"></ion-icon>
         </div>
         <div [@bounce]='state'>
-          <h2 color="light">Track your routine</h2>
-          <p color="light">whether it's sets, reps, weight used, you can track it all with our intuitive interface.</p>
+          <h2 color="light">Welcome to SimpliFid</h2>
+          <p color="light">Open an account and start investing within minutes</p>
         </div>
       </ion-slide>
       <ion-slide>
@@ -15,8 +15,8 @@
           <ion-icon ios="ios-trophy" md="md-trophy" color="light" [@bounce]='state'></ion-icon>
         </div>
         <div [@bounce]='state'>
-          <h2 color="light">set personal goals</h2>
-          <p color="light">we're all in the gym for a reason: goals. set goals for diet and fitness.</p>
+          <h2 color="light">Want to invest but dont know how?</h2>
+          <p color="light">We'll be happy to invest on your behalf.</p>
         </div>
       </ion-slide>
       <ion-slide>
@@ -24,10 +24,28 @@
           <ion-icon ios="ios-chatboxes" md="md-chatboxes" color="light" [@bounce]='state'></ion-icon>
         </div>
         <div [@bounce]='state'>
-          <h2 color="light">chat with others</h2>
-          <p color="light">inspire and help each other reach fitness and diet goals.</p>
+          <h2 color="light">All it takes is a dollar a month</h2>
+          <p color="light">SimpliFid charges a flat monthly fee of $1, with no hidden charges</p>
         </div>
       </ion-slide>
+      <ion-slide>
+          <div class="diag">
+            <ion-icon ios="ios-chatboxes" md="md-chatboxes" color="light" [@bounce]='state'></ion-icon>
+          </div>
+          <div [@bounce]='state'>
+            <h2 color="light">Think you dont have money to invest</h2>
+            <p color="light">We'll round off to the nearest dollar every time you swipe your credit card, and invest the round-off amount</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="diag">
+              <ion-icon ios="ios-chatboxes" md="md-chatboxes" color="light" [@bounce]='state'></ion-icon>
+            </div>
+            <div [@bounce]='state'>
+              <h2 color="light">Peer-to-peer landing</h2>
+              <p color="light">Borrow money from fellow SimpliFid users at dirt-cheap interest rates</p>
+            </div>
+          </ion-slide>
     </ion-slides>
     <button ion-button round (click)="skip()" id="skip">Create an Account</button> 
     <button ion-button round (click)="showFingerPrintDailog()" id="accountSetup">Already a User SignIn</button>
