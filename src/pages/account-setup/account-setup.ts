@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,Content } from 'ionic-angular';
 import { Camera} from '@ionic-native/camera';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { CongratulatePage } from '../congratulate/congratulate';
+import {Http, Response} from '@angular/http';
 declare var window;
 /**
  * Generated class for the AccountSetupPage page.
@@ -24,7 +25,7 @@ export class AccountSetupPage {
   @ViewChild('uploadPictureDiv', { read: ElementRef }) uploadPictureDiv:ElementRef;
   
   
-  constructor(public navCtrl: NavController,private elRef:ElementRef, public navParams: NavParams,private camera: Camera,public ngZone: NgZone,public tts:TextToSpeech) {
+  constructor(public navCtrl: NavController,private elRef:ElementRef, public navParams: NavParams,private camera: Camera,public ngZone: NgZone,public tts:TextToSpeech,private http:Http) {
     this.messages.push({
       text: "Hi, how can i help you?",
       sender: "api"
@@ -104,9 +105,53 @@ export class AccountSetupPage {
       console.log(err);
     })
   }
+  
+    public license:any;
 
-  callApiForDriverDetails(){
-    setTimeout(()=>{
+  public licenseUrl = 'https://wabr.inliteresearch.com/barcodes';
+
+  public firstName;
+  public lastName;
+
+  public base64: any;
+  
+    onFileChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = (event: ProgressEvent) => {
+        this.base64 = (<FileReader>event.target).result;
+      }
+  
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+  
+  licensify() {
+    //console.log(this.license);
+    var formData = new FormData();
+    formData.append('image', this.base64);
+    console.log(formData);
+    this.postIt(this.licenseUrl, formData);
+  }
+
+  postIt(purl, postdata) {
+    // var headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    this.messages.push({
+      text: "We are retrieving your personal information",
+      sender: "api"
+    });
+    this.tts.speak({
+      text:"We are retrieving your personal information",
+      locale: "en-US",
+      rate: 1
+    });
+    return this.http.post(purl, postdata).toPromise().then(response => {
+      var temp = JSON.parse(response["_body"]);
+     // console.log(temp);
+    /*   this.firstName = temp["Barcodes"][0]["Values"]["AAMVA"]["first"];
+      this.lastName = temp["Barcodes"][0]["Values"]["AAMVA"]["last"]; */
       this.messages.push({
         text: "As per your driving licence i see that your first name is Soumitra Would you like me to call you as Soumitra?",
         sender: "api"
@@ -116,6 +161,13 @@ export class AccountSetupPage {
         locale: "en-US",
         rate: 1
       });
+      this.uploadPicture = false;
+    });
+  }
+
+  callApiForDriverDetails(){
+    setTimeout(()=>{
+      
     },2000);
   }
 

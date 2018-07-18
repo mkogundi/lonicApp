@@ -19,6 +19,7 @@ export class SurveyPage {
   InvestorType: String = 'Based on the survey result we categorize your investment profile as';
   portfolioseries: any = [];
   portfoliochart: any;
+  ContinueTrade:Boolean = true;
   ShowPortfolioRecommendation: Boolean = true;
   AccountType: String = "Yes";
   EmployeeType: String = "Employed";
@@ -171,15 +172,15 @@ export class SurveyPage {
     }
 
     if (Q4[0].answer >= 0 && Q4[0].answer <= 30) {
-      Q4InvestorScore = 0;
+      Q4InvestorScore = 10;
     } else if (Q4[0].answer >= 31 && Q4[0].answer <= 40) {
-      Q4InvestorScore = 3;
+      Q4InvestorScore = 8;
     } else if (Q4[0].answer >= 41 && Q4[0].answer <= 50) {
       Q4InvestorScore = 5;
     } else if (Q4[0].answer >= 51 && Q4[0].answer <= 60) {
-      Q4InvestorScore = 8;
+      Q4InvestorScore = 3;
     } else if (Q4[0].answer >= 61) {
-      Q4InvestorScore = 10;
+      Q4InvestorScore = 0;
     }
 
     if (Q5[0].answer >= 0 && Q5[0].answer <= 25000) {
@@ -201,28 +202,32 @@ export class SurveyPage {
           {
             name: 'Fixed Income',
             y: 50,
-            sliced: true
+            sliced: true,
+            color:'#42d4f4'
           },
           {
-            name: 'Domestic Stocs',
+            name: 'Domestic Stocks',
             y: 14,
-            sliced: false
+            sliced: false,
+            color:'#41f4af'
           },
           {
-            name: 'Short Term investments',
+            name: 'Short Term Investments',
             y: 30,
-            sliced: false
+            sliced: false,
+            color:'#f2eb93'
           },
           {
             name: 'Foriegn Stocks',
             y: 6,
-            sliced: false
+            sliced: false,
+            color:'#d292f1'
           },
         ]
       }];
       this.Result = [
-        {FundName:'Vanguard Total Index Fund',FundPercent:'15.90%'},
-        {FundName:'Fidelity Global Bond Fund',FundPercent:'15.20%'},
+        {FundName:'Vanguard Index Fund',FundPercent:'15.90%'},
+        {FundName:'Fidelity Bond Fund',FundPercent:'15.20%'},
         {FundName:'Fixed Income',FundPercent:'6.30%'},
         // {FundName:'GS Bond Fund',FundPercent:'4.8%'},
         // {FundName:'BlackRock US Growth Fund',FundPercent:'4.6%'}
@@ -238,25 +243,28 @@ export class SurveyPage {
             sliced: true
           },
           {
-            name: 'Domestic Stocs',
+            name: 'Domestic Stocks',
             y: 35,
-            sliced: false
+            sliced: false,
+            color:'#41f4af'
           },
           {
-            name: 'Short Term investments',
+            name: 'Short Term Investments',
             y: 10,
-            sliced: false
+            sliced: false,
+            color:'#f2eb93'
           },
           {
             name: 'Foriegn Stocks',
             y: 15,
-            sliced: false
+            sliced: false,
+            color:'#d292f1'
           },
         ]
       }];
       this.Result = [
-        {FundName:'Vanguard Total Index Fund',FundPercent:'13.20%'},
-        {FundName:'Fidelity US Focused Stock Fund',FundPercent:'12.50%'},
+        {FundName:'Vanguard Index Fund',FundPercent:'13.20%'},
+        {FundName:'Fidelity US Stock Fund',FundPercent:'12.50%'},
         {FundName:'GS Bond Fund',FundPercent:'9.5%'},
         // {FundName:'Vanguard International Fund',FundPercent:'8.8%'},
         // {FundName:'BlackRock US Growth Fund',FundPercent:'7.4%'}
@@ -270,29 +278,33 @@ export class SurveyPage {
           {
             name: 'Fixed Income',
             y: 30,
-            sliced: true
+            sliced: true,
+            color:'#42d4f4'
           },
           {
-            name: 'Domestic Stocs',
+            name: 'Domestic Stocks',
             y: 45,
-            sliced: false
+            sliced: false,
+            color:'#41f4af'
           },
           {
-            name: 'Short Term investments',
+            name: 'Short Term Investments',
             y: 7,
-            sliced: false
+            sliced: false,
+            color:'#f2eb93'
           },
           {
             name: 'Foriegn Stocks',
             y: 18,
-            sliced: false
+            sliced: false,
+            color:'#d292f1'
           },
         ]
       }];
       this.Result = [
-        {FundName:'Fidelity Global Bond Fund',FundPercent:'17.3%'},
+        {FundName:'Fidelity Bond Fund',FundPercent:'17.3%'},
         {FundName:'GS Bond Fund',FundPercent:'8.90%'},
-        {FundName:'Fidelity US Focused Stock Fund',FundPercent:'8.2%'},
+        {FundName:'Fidelity US Stock Fund',FundPercent:'8.2%'},
         // {FundName:'GS Bond Fund',FundPercent:'4.8%'},
         // {FundName:'BlackRock US Growth Fund',FundPercent:'4.6%'}
       ];
@@ -305,29 +317,33 @@ export class SurveyPage {
           {
             name: 'Fixed Income',
             y: 25,
-            sliced: true
+            sliced: true,
+            color:'#42d4f4'
           },
           {
-            name: 'Domestic Stocs',
+            name: 'Domestic Stocks',
             y: 49,
-            sliced: false
+            sliced: false,
+            color:'#41f4af'
           },
           {
-            name: 'Short Term investments',
+            name: 'Short Term Investments',
             y: 5,
-            sliced: false
+            sliced: false,
+            color:'#f2eb93'
           },
           {
             name: 'Foriegn Stocks',
             y: 21,
-            sliced: false
+            sliced: false,
+            color:'#d292f1'
           },
         ]
       }];
       this.Result = [
-        {FundName:'Fidelity US Focused Fund',FundPercent:'13.8%'},
-        {FundName:'Vanguard Int. Growth Fund',FundPercent:'13.6%'},
-        {FundName:'Wells Fargo Growth Fund',FundPercent:'10.8%'},
+        {FundName:'Fidelity US Fund',FundPercent:'13.8%'},
+        {FundName:'Vanguard Int. Fund',FundPercent:'13.6%'},
+        {FundName:'WFargo Growth Fund',FundPercent:'10.8%'},
         // {FundName:'GS Bond Fund',FundPercent:'4.8%'},
         // {FundName:'BlackRock US Growth Fund',FundPercent:'4.6%'}
       ];
@@ -340,29 +356,33 @@ export class SurveyPage {
           {
             name: 'Fixed Income',
             y: 15,
-            sliced: true
+            sliced: true,
+            color:'#42d4f4'
           },
           {
-            name: 'Domestic Stocs',
+            name: 'Domestic Stocks',
             y: 59,
-            sliced: false
+            sliced: false,
+            color:'#41f4af'
           },
           {
-            name: 'Short Term investments',
+            name: 'Short Term Investments',
             y: 1,
-            sliced: false
+            sliced: false,
+            color:'#f2eb93'
           },
           {
             name: 'Foriegn Stocks',
             y: 25,
-            sliced: false
+            sliced: false,
+            color:'#d292f1'
           },
         ]
       }];
       this.Result = [
-        {FundName:'Wells Fargo Growth Fund',FundPercent:'17.3%'},
-        {FundName:'Schwa Emerging Markets ETF',FundPercent:'10.8%'},
-        {FundName:'Fidelity Emerging Markets Fund',FundPercent:'9.6%'},
+        {FundName:'WFargo Growth Fund',FundPercent:'17.3%'},
+        {FundName:'Schwa Emerging ETF',FundPercent:'10.8%'},
+        {FundName:'Fidelity Emerging Mkt',FundPercent:'9.6%'},
         // {FundName:'Fidelity US Focused Stock Fund',FundPercent:'4.8%'},
         // {FundName:'BlackRock US Growth Fund',FundPercent:'4.6%'}
       ];
@@ -397,6 +417,7 @@ export class SurveyPage {
         },
         plotOptions: {
           pie: {
+            allowPointSelect:true,
             dataLabels: {
               enabled: true,
               formatter: function () {
@@ -405,6 +426,9 @@ export class SurveyPage {
               color:'black',
               shadow:false,
               distance: -30,
+              style:{
+                textOutline:false
+              }
             }
           }
         },
@@ -414,6 +438,10 @@ export class SurveyPage {
         series: this.portfolioseries
       });
     }
+  }
+
+  placeOrder(){
+    this.navCtrl.push(OrderEntryPage);
   }
 
   // SwitchAnswer() {
@@ -426,7 +454,4 @@ export class SurveyPage {
   //   }
   // }
 
-  placeOrder(){
-    this.navCtrl.push(OrderEntryPage);
-  }
 }

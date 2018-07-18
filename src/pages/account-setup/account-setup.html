@@ -15,9 +15,14 @@
         </ion-item>
       </ion-list>
       <div #uploadPictureDiv *ngIf="uploadPicture"> 
-          <button ion-button round (click)="takePicture()">Take a Picture</button>
+         <!--  <button ion-button round (click)="takePicture()">Take a Picture</button>
           Uploaded Picture:
-          <img [src]=[base64Image] *ngIf="base64Image" />
+          <img [src]=[base64Image] *ngIf="base64Image" /> -->
+          <input type="file" id="lic" name="lic" (change)="onFileChange($event)" capture="camera" accept="image/*"/>
+          <button ion-button round (click)="licensify()">Upload</button>
+          <!-- <div *ngIf="firstName && lastName">
+              Welcome {{firstName}} {{lastName}}
+          </div> -->
       </div> 
       <div #uploadPictureDiv *ngIf="uploadSelfie"> 
           <button ion-button round (click)="takeSelfie()">Take a Selfie</button>
@@ -26,6 +31,8 @@
       </div> 
 
 </ion-content>
+
+
 
 <ion-footer>
   <ion-toolbar>
