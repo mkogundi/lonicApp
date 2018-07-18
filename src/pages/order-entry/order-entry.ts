@@ -30,7 +30,7 @@ export class OrderEntryPage {
   fingerprintOptions: FingerprintOptions;
   constructor(public navCtrl: NavController,private elRef:ElementRef, public navParams: NavParams,private camera: Camera,public ngZone: NgZone,public tts:TextToSpeech,public http: Http,private platform: Platform,private fingerprint: FingerprintAIO) {
     this.messages.push({
-      text: "okay, please help me with the details",
+      text: "okay, please help me with the order details",
       sender: "api"
     }); 
   //  this.callApiForOrderDetails();
@@ -91,7 +91,7 @@ export class OrderEntryPage {
     let action = "Buy";
     let timeKey = data["Meta Data"]["3. Last Refreshed"];
     let price = data["Time Series (1min)"][timeKey]["4. close"];
-    let totalAmount = parseFloat(price) * Quantity;
+    let totalAmount = (parseFloat(price) * Quantity).toFixed(2);
     this.statement = "At the current market price of $"+price+"per share of Tesla,the total amount is $"+ totalAmount + "could you please confirm the details below";
     });
   }
@@ -189,7 +189,7 @@ export class OrderEntryPage {
   }
 
   navigateAway(){
-    this.navCtrl.setRoot(CongratulatePage);
+    this.navCtrl.setRoot(CongratulatePage,{data:'orderplaced'});
   }
 
   async showFingerPrintDailog(){

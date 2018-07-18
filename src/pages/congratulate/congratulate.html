@@ -26,8 +26,10 @@
       <img src="assets/Invest.jpg">
     
       <ion-card-content>
-        <p class="congratulate" *ngIf="screen != 'thanks'">Congratulations,Your Brokerage account 214123456 is Active! You can now try our managed Services or Transfer assets  </p>
-        <p class="congratulate" *ngIf="screen == 'thanks'">Thanks For linking your account try investing funds now </p>
+        <p class="congratulate" *ngIf="screen != 'thanks' && screen != 'orderplaced' &&screen != 'alreadyLoggedIn'">Congratulations,Your Brokerage account 214123456 is Active! You can now try our managed Services or fund your account </p>
+        <p class="congratulate" *ngIf="screen == 'thanks'">Thanks For linking your account. Try investing funds now </p>
+        <p class="congratulate" *ngIf="screen == 'orderplaced'">Your Order has been placed successfully</p>
+        <p class="congratulate" *ngIf="screen == 'alreadyLoggedIn'">What would you want to do today!</p>
       </ion-card-content>
     
       <ion-row style="margin-left: 35px;">

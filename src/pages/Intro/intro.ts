@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams ,Slides, Platform} from 'ionic-angu
 import { AccountSetupPage } from '../account-setup/account-setup';
 import { FingerprintAIO , FingerprintOptions} from '@ionic-native/fingerprint-aio'
 import { ListPage } from '../list/list';
+import { CongratulatePage } from '../congratulate/congratulate';
 /**
  * Generated class for the IntroPage page.
  *
@@ -76,7 +77,7 @@ export class IntroPage {
         if(available === 'finger'){
           const result = await this.fingerprint.show(this.fingerprintOptions);
           if (result != ''){
-            this.navCtrl.push(ListPage);
+            this.navCtrl.push(CongratulatePage,{data:'alreadyLoggedIn'});
           }
         }
     } catch (error) {
