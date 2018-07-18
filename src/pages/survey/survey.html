@@ -1,0 +1,136 @@
+<ion-content class="page-survey pageBackground">
+  <ion-slides pager (ionSlideReachEnd)="ShowSurveyResult()">
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <h2 class="slide-title">Welcome for a quick survey</h2>
+      <button ion-button small round icon-end color="primary" (click)="ShowNextSlide()">
+        Next
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+    <ion-slide *ngFor="let slide of slides">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <ion-toolbar>
+              <ion-buttons start>
+                <button ion-button round color="primary" (click)="ShowPreviousSlide()">Previous</button>
+              </ion-buttons>
+              <ion-buttons end>
+                <button ion-button round color="primary" (click)="ShowNextSlide()">Next</button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <p [innerHTML]="slide.description"></p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-item *ngIf="slide.AnswerType == 'slider'">
+              <ion-range [(ngModel)]="slide.answer" step={{slide.step}} min={{slide.LowerRange}} max={{slide.HighRange}} pin="true">
+                <ion-icon range-left small style="font-size: 14px;font-weight: bold">{{slide.LowerRangeText}}</ion-icon>
+                <ion-icon range-right small style="font-size: 14px;font-weight: bold">{{slide.HighRangeText}}</ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4 style="text-align: right">
+              <ion-label *ngIf="slide.DisplayType == 'Start'" >{{slide.DisplayLabel}}</ion-label>
+          </ion-col>
+          <ion-col col-4>
+            <!-- <ion-label *ngIf="slide.DisplayType == 'Start'" >{{slide.DisplayLabel}}</ion-label> -->
+            <ion-item style="text-align: center;border:0.5px solid" *ngIf="slide.AnswerType == 'slider'">
+              <!-- <ion-label *ngIf="slide.DisplayType == 'Start'" >{{slide.DisplayLabel}}</ion-label> -->
+              <ion-input  [(ngModel)]="slide.answer" type="text"></ion-input>
+              <!-- <ion-label *ngIf="slide.DisplayType == 'End'" >{{slide.DisplayLabel}}</ion-label> -->
+            </ion-item>   
+            <!-- <ion-label *ngIf="slide.DisplayType == 'End'" >{{slide.DisplayLabel}}</ion-label>          -->
+          </ion-col>
+          <ion-col col-4 style="text-align: left">
+              <ion-label *ngIf="slide.DisplayType == 'End'" >{{slide.DisplayLabel}}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-list [(ngModel)]="EmployeeType" radio-group *ngIf="slide.AnswerType == 'checkbox'">
+              <ion-item>
+                <ion-label>Employed</ion-label>
+                <ion-radio checked="true" value="Employed"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Unemployed</ion-label>
+                <ion-radio value="Unemployed"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Student</ion-label>
+                <ion-radio value="Student"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Retired</ion-label>
+                <ion-radio value="Retired"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide>
+      <ion-grid>
+        <ion-toolbar>
+          <ion-buttons start>
+            <button ion-button round color="primary" (click)="ShowPreviousSlide()">Previous</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button ion-button round color="primary" (click)="ShowNextSlide()">Next</button>
+          </ion-buttons>
+        </ion-toolbar>
+        <!-- <h2 class="slide-title" style="color:#15FA43">Thank you!!</h2> -->
+        <!-- <p [innerHTML]="InvestorType"></p> -->
+        <ion-row>
+          <ion-col col-12>
+            <p [innerHTML]="AccountTypeQuestion"></p>
+          </ion-col>
+        </ion-row>
+        <ion-list [(ngModel)]="AccountType" radio-group>
+          <ion-item>
+            <ion-label>Yes</ion-label>
+            <ion-radio checked="true" value="Yes"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>No</ion-label>
+            <ion-radio value="No"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <!-- <button ion-button small round icon-end color="primary" (click)="ShowNextSlide()">
+        Next
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button> -->
+      </ion-grid>
+    </ion-slide>
+    <ion-slide>
+      <h2 class="slide-title" style="color:#15FA43;font-size: 16px;">Thank you!!</h2>
+      <p [innerHTML]="InvestorType"></p>
+      <button ion-button small round icon-end color="primary" (click)="placeOrder()" >
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+      <div id="PortfolioChart" [hidden]="!ShowPortfolioRecommendation"></div>
+      <ion-list [hidden]="!ShowPortfolioRecommendation">
+          <ion-item *ngFor="let fund of Result">           
+            <p style="font-size: 14px;"><b>{{fund.FundName}}</b></p>
+            <p style="font-size: 12px;"><b>{{fund.FundPercent}}</b></p>
+          </ion-item>
+        </ion-list>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

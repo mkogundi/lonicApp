@@ -1,0 +1,42 @@
+<ion-content padding style="background: url('assets/backgroundRed.jpg') no-repeat">
+
+  <ion-list no-lines class="chat-list" text-wrap>
+      <ion-item #addMessage class="chat-item" *ngFor="let message of messages">
+        <ion-avatar item-left *ngIf="message.sender == 'api'">
+          <img src="assets/apiai.png" alt="">
+        </ion-avatar>
+        <ion-avatar item-right *ngIf="message.sender == 'me'">
+          <img src="assets/ionic.png" alt="">
+        </ion-avatar>
+        <div *ngIf="message.sender == 'api'" class="bubble me" [innerHTML]="message.text |safeHtml">
+        </div>
+        <div *ngIf="message.sender == 'me'" class="bubble you" [innerHTML]="message.text | safeHtml">
+        </div> 
+      </ion-item>
+    </ion-list>
+    <div #uploadPictureDiv *ngIf="uploadPicture"> 
+        <button ion-button round (click)="takePicture()">Take a Picture</button>
+        Uploaded Picture:
+        <img [src]=[base64Image] *ngIf="base64Image" />
+    </div> 
+    <div #uploadPictureDiv *ngIf="uploadSelfie"> 
+        <button ion-button round (click)="takeSelfie()">Take a Selfie</button>
+        Uploaded Picture:
+        <img [src]=[base64Selfie] *ngIf="base64Selfie" />
+    </div> 
+
+</ion-content>
+
+<ion-footer>
+<ion-toolbar>
+  <ion-item>
+    <ion-input type="text" #input placeholder="Your Message Here.." [(ngModel)]="text"></ion-input>
+    <button ion-button icon-only item-right clear (click)="sendText();input.setFocus()">
+      <ion-icon name="send"></ion-icon>
+    </button>
+    <button ion-button icon-only item-right clear (click)="sendVoice()">
+      <ion-icon name="mic"></ion-icon>
+    </button>
+  </ion-item>
+</ion-toolbar>
+</ion-footer>

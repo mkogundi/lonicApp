@@ -1,0 +1,61 @@
+.payment-options select {
+    color: #333;
+}
+
+select {
+    padding: 0 0 0 5px;
+    color: #ababab;
+    background: url(/content/images/select-arrow.png) 96% 25px no-repeat;
+}
+.btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #e3714d;
+    border: 1px solid #e3714d;
+    display: inline-block;
+    text-transform: capitalize;
+    text-align: center;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    line-height: 1pc;
+    padding: 6px 75px 8px;
+    margin: 0 6px 0 0;
+    border-radius: 0;
+}
+.btn.grey, .btn.grey:active, .btn.grey:hover {
+    background: #ececec;
+    color: #606060;
+    border: 1px solid #ececec;
+}
+.btn.cancel {
+    float: left;
+}
+/*@media (max-width: 679px) {
+    .left-guess {
+        left: 0% !important;
+    }
+}*/
+
+ .card-image {
+    background: url(../assets/imgs/creditcards.png) 33px 22px no-repeat;
+    background-size: 10pc auto;
+    display: inline-block;
+    width: 2pc;
+    height: 28px;
+    margin: 1px 2px 0 0;
+    position: absolute;
+    top: 9pt;
+    right: 6px;}
+    .VISA {
+        background-position: 0 0;
+    }
+    .AMEX {
+        background-position: -97px 0;
+    }
+   .MASTERCARD {
+        background-position: -2pc 0;
+    }
+    .MAESTRO,{
+        background-position: -4pc 0;
+    }

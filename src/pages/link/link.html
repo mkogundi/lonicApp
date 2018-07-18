@@ -1,0 +1,454 @@
+<!--<div class="ion-select-box custom" >
+   <ion-select name="paymentMethod" class="payment-method" id="paymentMethodion-select">
+     <ion-option value="1" ion-selected="1">Credit/Debit card</ion-option>
+      <ion-option value="2">Netbanking</ion-option>
+    </ion-select></div>-->
+<ion-header *ngIf="screen !='BOA' && screen !='CITI' && screen !='thanks'"> 
+  <ion-navbar color='navbarColor'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>SimpliFid</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content *ngIf="screen=='mode'" style="background: url('assets/backgroundRed.jpg') no-repeat">
+
+  <ion-item>
+    <ion-label>Mode</ion-label>
+    <ion-select style="    min-width: 60%;" [placeholder]='mode' [(ngModel)]="mode">
+
+      <ion-option value="cdcard">Credit/Debit Card</ion-option>
+      <ion-option value="netbanking">Net Banking</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="mode=='cdcard'">
+    <ion-input (change)=cardtype(); type="number" placeholder="CARD NUMBER">
+    </ion-input>
+    
+    <!--<img clear item-right class="card-image VISA"  />-->
+  </ion-item>
+  <ion-item *ngIf="mode=='cdcard'">
+
+    <ion-select [placeholder]='"Month"' [(ngModel)]="month">
+
+      <ion-option value="01">01</ion-option>
+      <ion-option value="02">02</ion-option>
+      <ion-option value="03">03</ion-option>
+      <ion-option value="04">04</ion-option>
+      <ion-option value="05">05</ion-option>
+      <ion-option value="06">06</ion-option>
+      <ion-option value="07">07</ion-option>
+      <ion-option value="08">08</ion-option>
+      <ion-option value="09">09</ion-option>
+      <ion-option value="10">10</ion-option>
+      <ion-option value="11">11</ion-option>
+      <ion-option value="12">12</ion-option>
+    </ion-select>
+
+
+    <ion-select [placeholder]='"Year"' [(ngModel)]="year">
+      <ion-option value="2015">2015</ion-option>
+      <ion-option value="2016">2016</ion-option>
+      <ion-option value="2017">2017</ion-option>
+      <ion-option value="2018">2018</ion-option>
+      <ion-option value="2019">2019</ion-option>
+      <ion-option value="2020">2020</ion-option>
+      <ion-option value="2021">2021</ion-option>
+      <ion-option value="2022">2022</ion-option>
+      <ion-option value="2023">2023</ion-option>
+      <ion-option value="2024">2024</ion-option>
+      <ion-option value="2025">2025</ion-option>
+      <ion-option value="2026">2026</ion-option>
+      <ion-option value="2027">2027</ion-option>
+      <ion-option value="2028">2028</ion-option>
+      <ion-option value="2029">2029</ion-option>
+      <ion-option value="2030">2030</ion-option>
+      <ion-option value="2031">2031</ion-option>
+      <ion-option value="2032">2032</ion-option>
+      <ion-option value="2033">2033</ion-option>
+      <ion-option value="2034">2034</ion-option>
+      <ion-option value="2035">2035</ion-option>
+      <ion-option value="2036">2036</ion-option>
+      <ion-option value="2037">2037</ion-option>
+      <ion-option value="2038">2038</ion-option>
+    </ion-select>
+
+  </ion-item>
+  <ion-item *ngIf="mode=='cdcard'">
+    <ion-input type="text" placeholder="NAME ON CARD"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="mode=='netbanking'">
+    <ion-label style="    text-align: center;">Choose a Bank</ion-label>
+    <!--<ion-select [placeholder]='"Banks"' [(ngModel)]="bank">
+
+      <ion-option value="01">Bank Of America</ion-option>
+      <ion-option value="02">Citi Bank</ion-option>
+      <ion-option value="03">JP Morgan</ion-option>
+      <ion-option value="04">Wells Fargo</ion-option>
+      <ion-option value="05">Goldman Sachs</ion-option>
+      <ion-option value="06">Morgan Stanley</ion-option>
+
+    </ion-select>-->
+  </ion-item>
+  <!--
+  <ion-item *ngIf="mode=='netbanking'">
+
+
+    <ion-input type="number" placeholder="User ID"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="mode=='netbanking'">
+
+
+    <ion-input type="password" placeholder="password"></ion-input>
+  </ion-item>
+  -->
+  <ion-item *ngIf="mode=='PIN'">
+    <ion-label text-wrap>Please enter the 4 Digit Pin sent to your mobile Number and Email</ion-label>
+
+  </ion-item>
+  <ion-item *ngIf="mode=='PIN'">
+    <ion-input type="password" placeholder="PIN"></ion-input>
+  </ion-item>
+
+<ion-item *ngIf="mode=='PIN'">
+  <ion-label text-wrap style="  font-size: small; font-weight: 100;">
+      By clicking on 'Proceed' you confirm that you authorize us to debit $1/Month from your account.
+  </ion-label>
+</ion-item>
+  <ion-item *ngIf="mode=='cdcard'">
+    <button (click)="onCancelClick()" ion-button color="light">Cancel</button>
+
+    <button (click)="onProceedClick()" ion-button color="secondary">Proceed</button>
+  </ion-item>
+
+  <!--<ion-item *ngIf="mode=='netbanking'">
+    <button  (click)="onCancelClick()" ion-button color="light">Cancel</button>
+
+    <button (click)="onProceedClick()" ion-button color="secondary">Proceed</button>
+  </ion-item>-->
+  <ion-item *ngIf="mode=='PIN'">
+    <button (click)="onCancelClick()" ion-button color="light">Cancel</button>
+
+    <button (click)="thanksmsg()" ion-button color="secondary">Proceed</button>
+  </ion-item>
+
+
+  <ion-grid *ngIf="mode=='netbanking'">
+    <ion-row>
+      <ion-col>
+        <div (click)="onBOAClick()" class="image-container">
+          <img src="assets/imgs/boalogo1.jpg" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <div (click)="onCitiClick()" class="image-container">
+          <img src="assets/imgs/cititile.png" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/jpmgtile.png" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/morganstile.png" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/goldstile2.png" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/wftile.png" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/bny.jpg" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/tdbanktile.jpg" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/usaa.png" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/usbank.png" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/pnctile.jpg" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="image-container">
+          <img src="assets/imgs/capitalone.jpg" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="screen=='BOA'" style="background: url('assets/backgroundRed.jpg') no-repeat">
+
+  <div id="BOALogin" *ngIf="BOALoginvisible" class="item-container item-container-bot">
+    <div style="  position: absolute; top: 15%; text-align: center;padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+      class=" item talk-bot left-guess">
+      <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;" src="assets/imgs/boa-logo-svg.svg">
+      <div style=" background-color: #dc1431;">
+        <div style="text-align: center;border: 1px,solid;width: 354.641;height: 250px;width: 390.641;padding-top: 17px;">
+          <input type="text" placeholder="Online ID" style="    height: 40px;    font-size: 18px;    width: 250px;">
+          <br>
+          <br>
+          <input type="password" placeholder="password" style="    font-size: 18px;   height: 40px;    width: 250px;">
+          <br>
+          <br>
+          <button (click)="addBotBOASignin()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn" style=" cursor: pointer; background-color:#0052C2;    border: 1px solid #fff;    color: #fff;height: 40px;    padding: 5px 25px;    text-align: center;   white-space: nowrap;    width: 250px;">
+            <span>Sign In</span>
+          </button>
+          <br>
+          <br>
+          <button (click) ="closeing()"  class="btn btn--primary btn--block btn--medium" type="submit" style="cursor: pointer;background-color:  #DC1431;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 250px;">
+            <span>Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="tansferboa" *ngIf="BOAlinkvisible" class="item-container item-container-bot">
+    <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+      class="item talk-bot left-guess">
+      <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;"
+        src="assets/imgs/boa-logo-svg.svg">
+      <div style=" background-color: #dc1431;">
+        <div style="text-align: center;border: 1px,solid;width: 354.641;height: 230px;width: 390.641;">
+          <br>
+          <label style="color: white;font-weight: 700;font-size: large;">Account :</label>         
+          <br>
+          <hr>
+          <select style="          color: black;          background-color: white;      ">
+              <option value="0">select</option>
+              <option value="1">Saving - 1254845154545</option>
+              <option value="2">Checking - 5547894516655</option>
+             
+            </select>
+          <br>
+          <br>
+          <button (click)="addBotBOAproceed()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn"
+            style="cursor: pointer;background-color: #0052C2 ;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 200px;">
+            <span>proceed</span>
+          </button>
+          <br>
+          <br>
+          <button (click)="closeing()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn" style="cursor: pointer;background-color:#dc1431;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 200px;">
+            <span>Cancel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="tansferboa" *ngIf="BOApinvisible" class="item-container item-container-bot">
+      <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+        class="item talk-bot left-guess">
+        <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;"
+          src="assets/imgs/boa-logo-svg.svg">
+        <div style=" background-color: #dc1431;">
+          <div style="text-align: center;border: 1px,solid;width: 354.641;height: 270px;width: 390.641;">
+            <br>
+            <label style="color: white;font-weight: 100;font-size: large;">
+              Please enter the 4 Digit Pin sent to your mobile Number and Email :</label>         
+            <br>
+            <hr>
+            <input type="text" id="pin" style="    height: 20px;    font-size: 15px;    width: 100px;">
+            <br>
+            <br>
+            <label style="color: white;font-weight: 100;font-size: small;">
+                By clicking on 'Link' you confirm that you authorize us to debit $1/Month from your account.</label>  
+                <br>
+            <button (click)="thanksmsg()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn"
+              style="cursor: pointer;background-color: #0052C2 ;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 200px;">
+              <span>Link</span>
+            </button>
+            <br>
+            <br>
+            <button (click)="closeing()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn" style="cursor: pointer;background-color:#dc1431;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 200px;">
+              <span>Cancel</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</ion-content>
+<ion-content *ngIf="screen=='CITI'" style="background: url('assets/backgroundRed.jpg') no-repeat">
+    <div id="BOALogin" *ngIf="CITILoginvisible" class="item-container item-container-bot">
+        <div style="  position: absolute; top: 15%; text-align: center;padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+          class=" item talk-bot left-guess">
+          <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;" src="assets/imgs/citibank.png">
+          <div style=" background: linear-gradient(180deg,#00bdf2,#00b3f0 18%,#0066b3 77%,#004985);">
+            <div style="text-align: center;border: 1px,solid;width: 354.641;height: 250px;width: 390.641;padding-top: 17px;">
+              <input type="text" placeholder="Online ID" style="    height: 40px;    font-size: 18px;    width: 250px;">
+              <br>
+              <br>
+              <input type="password" placeholder="password" style="    font-size: 18px;   height: 40px;    width: 250px;">
+              <br>
+              <br>
+              <button (click)="addBotCITISignin()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn" style=" cursor: pointer; background-color:red;    border: 1px solid #fff;    color: #fff;height: 40px;    padding: 5px 25px;    text-align: center;   white-space: nowrap;    width: 250px;">
+                <span>Sign In</span>
+              </button>
+              <br>
+              <br>
+              <button (click)="closeing()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn" style="cursor: pointer;background-color:  #0052C2;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 250px;">
+                <span>Close</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="tansferboa" *ngIf="CITIlinkvisible" class="item-container item-container-bot">
+        <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+          class="item talk-bot left-guess">
+          <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;"
+          src="assets/imgs/citibank.png">
+          <div style=" background: linear-gradient(180deg,#00bdf2,#00b3f0 18%,#0066b3 77%,#004985);">
+            <div style="text-align: center;border: 1px,solid;width: 354.641;height: 230px;width: 390.641;">
+              <br>
+              <label style="color: white;font-weight: 700;font-size: large;">Account :</label>         
+              <br>
+              <hr>
+              <select style="          color: black;          background-color: white;      ">
+                  <option value="0">select</option>
+                  <option value="1">Saving - 1254845154545</option>
+                  <option value="2">Checking - 5547894516655</option>
+                 
+                </select>
+              <br>
+              <br>
+              <button (click)="addBotCITIproceed()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn"
+                style="cursor: pointer;background-color: red ;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 200px;">
+                <span>proceed</span>
+              </button>
+              <br>
+              <br>
+              <button (click)="closeing()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn" style="cursor: pointer;background-color:#0052C2;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 200px;">
+                <span>Cancel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="tansferboa" *ngIf="CITIpinvisible" class="item-container item-container-bot">
+          <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+            class="item talk-bot left-guess">
+            <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;"
+            src="assets/imgs/citibank.png">
+            <div  style=" background: linear-gradient(180deg,#00bdf2,#00b3f0 18%,#0066b3 77%,#004985);">
+              <div style="text-align: center;border: 1px,solid;width: 354.641;height: 270px;width: 390.641;">
+                <br>
+                <label style="color: white;font-weight: 100;font-size: large;">
+                  Please enter the 4 Digit Pin sent to your mobile Number and Email :</label>         
+                <br>
+                <hr>
+                <input type="text" id="pin" style="    height: 20px;    font-size: 15px;    width: 100px;">
+                <br>
+                <br>
+                <label style="color: white;font-weight: 100;font-size: small;">
+                    By clicking on 'Link' you confirm that you authorize us to debit $1/Month from your account.</label>  
+                    <br>
+                <button (click)="thanksmsg()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn"
+                  style="cursor: pointer;background-color: red ;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 200px;">
+                  <span>Link</span>
+                </button>
+                <br>
+                <br>
+                <button (click)="closeing()" class="btn btn--primary btn--block btn--medium" type="submit" id="signIn" style="cursor: pointer;background-color:#0052C2;border: 1px solid #fff;color: #fff;height: 40px;padding: 5px 25px;text-align: center;white-space: nowrap;width: 200px;">
+                  <span>Cancel</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+</ion-content>
+<ion-content *ngIf="screen=='thanks'" style="background: url('assets/backgroundRed.jpg') no-repeat">
+    <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;" class="row green">
+        <img      style="width: 25px; height: 25px;"   src="assets/imgs/tick.png">
+        <br>
+     
+        <ion-label wrap-text >
+          we have linked your account.
+         <p style="color:#0052C2 !important">You will be now redirected to SimpliFid</p> 
+        </ion-label>
+        </div>    
+        
+  </ion-content>
+<!--
+
+    <div class="debCreditcard paymentform" id="paymentform-1">
+      <div class="creditdebit-form"><div class="form-field econtainer"> 
+        <input type="tel" placeholder="Card number" class="card-icon card-number" 
+        id="card-number" name="card-number" maxlength="19">
+        <span class="card-img" id="cardIcon"></span>
+        <div class="validations-error"></div></div>
+        <div class="form-field clearfix"><div class="ion-select-box exp-month econtainer">
+           <ion-select class="card-month" id="card-month" name="card-month">
+             <ion-option value="" disabled="" ion-selected="">Month</ion-option>
+             <ion-option value="01">01</ion-option><ion-option value="02">02</ion-option>
+             <ion-option value="03">03</ion-option><ion-option value="04">04</ion-option>
+             <ion-option value="05">05</ion-option><ion-option value="06">06</ion-option>
+             <ion-option value="07">07</ion-option><ion-option value="08">08</ion-option>
+             <ion-option value="09">09</ion-option><ion-option value="10">10</ion-option>
+             <ion-option value="11">11</ion-option><ion-option value="12">12</ion-option></ion-select>
+             <div class="validations-error"></div></div><div class="ion-select-box exp-year econtainer"> 
+               <ion-select class="card-year" id="card-year" name="card-year"><ion-option value="" disabled="" 
+                ion-selected="">Year</ion-option>
+                 <ion-option value="2015">2015</ion-option><ion-option value="2016">2016</ion-option>
+                 <ion-option value="2017">2017</ion-option><ion-option value="2018">2018</ion-option>
+                 <ion-option value="2019">2019</ion-option><ion-option value="2020">2020</ion-option>
+                 <ion-option value="2021">2021</ion-option><ion-option value="2022">2022</ion-option>
+                 <ion-option value="2023">2023</ion-option><ion-option value="2024">2024</ion-option>
+                 <ion-option value="2025">2025</ion-option><ion-option value="2026">2026</ion-option>
+                 <ion-option value="2027">2027</ion-option><ion-option value="2028">2028</ion-option>
+                 <ion-option value="2029">2029</ion-option><ion-option value="2030">2030</ion-option>
+                 <ion-option value="2031">2031</ion-option><ion-option value="2032">2032</ion-option>
+                 <ion-option value="2033">2033</ion-option><ion-option value="2034">2034</ion-option>
+                 <ion-option value="2035">2035</ion-option><ion-option value="2036">2036</ion-option>
+                 <ion-option value="2037">2037</ion-option><ion-option value="2038">2038</ion-option><ion-option value="2039">2039</ion-option><ion-option value="2040">2040</ion-option><ion-option value="2041">2041</ion-option><ion-option value="2042">2042</ion-option><ion-option value="2043">2043</ion-option><ion-option value="2044">2044</ion-option><ion-option value="2045">2045</ion-option><ion-option value="2046">2046</ion-option><ion-option value="2047">2047</ion-option><ion-option value="2048">2048</ion-option><ion-option value="2048">2049</ion-option><ion-option value="2048">2050</ion-option></ion-select>
+                 
+                 
+                 <div class="validations-error"></div>
+                </div>
+                 <div class="ion-select-box card-vendor econtainer" 
+                 > <ion-select class="card-vendor" id="card-vendor" name="card-vendor">
+                   <ion-option value="" disabled="" ion-selected="">Card Type</ion-option><ion-option value="visa">Visa</ion-option>
+                   <ion-option value="master">Master</ion-option><ion-option value="maestro">Maestro</ion-option>
+                   <ion-option value="rupay">Rupay</ion-option><ion-option value="amex">AMEX</ion-option>
+                   <ion-option value="diners">Diners</ion-option></ion-select><div class="validations-error"></div></div>
+                   <div class="econtainer cvv-container"> 
+                   <input type="password" maxlength="4" placeholder="CVV" class="cvv card-cvv"
+                    id="card-cvv" name="card-cvv"><div class="validations-error">
+
+                    </div></div></div></div></div>
+                    <div class="action-buttons" 
+                    id="addCashActionBtns" style="margin-top: 50px;">
+
+                    
+                    <div class="btn make-payment">Proceed</div>
+                    <div class="btn grey cancel go-home">Cancel</div></div>-->
