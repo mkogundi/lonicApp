@@ -72,6 +72,8 @@ export class AccountSetupPage {
 
   }
 
+  public licenseUrl = 'https://wabr.inliteresearch.com/barcodes';
+
   takePicture(){
     this.content.scrollToBottom(200);
     let options = {
@@ -81,11 +83,13 @@ export class AccountSetupPage {
       quality: 100,
       allowEdit: false,
       correctOrientation: false,
-      saveToPhotoAlbum: false
+      saveToPhotoAlbum: true,
+      encodingType:0
       // mediaType: 0
     };
     this.camera.getPicture(options)
     .then((imageData)=>{
+     // console.log(imageData);
       this.base64Image = "data:image/jpeg;base64," + imageData;
       setTimeout(()=>{
         this.uploadPicture = false;
@@ -99,7 +103,19 @@ export class AccountSetupPage {
           rate: 1
         });
       },2000)
-      this.callApiForDriverDetails();
+      //this.callApiForDriverDetails();
+     // alert(imageData);
+      var formData = new FormData();
+      this.http.get('base64Data.txt').subscribe(data => {
+        console.log(data.text());
+        formData.append('image',data.text());
+
+      this.postIt(this.licenseUrl,formData);
+      })
+     /*  formData.append('file',imageData);
+
+      this.postIt(this.licenseUrl,formData); */
+      
     })
     .catch(err=>{
       console.log(err);
@@ -108,7 +124,7 @@ export class AccountSetupPage {
   
     public license:any;
 
-  public licenseUrl = 'https://wabr.inliteresearch.com/barcodes';
+  
 
   public firstName;
   public lastName;
@@ -124,6 +140,7 @@ export class AccountSetupPage {
       }
   
       reader.readAsDataURL(event.target.files[0]);
+      console.log(event.target.files[0]);
     }
   }
   
@@ -131,27 +148,19 @@ export class AccountSetupPage {
     //console.log(this.license);
     var formData = new FormData();
     formData.append('image', this.base64);
+   // alert(this.base64);
     console.log(formData);
     this.postIt(this.licenseUrl, formData);
   }
 
   postIt(purl, postdata) {
-    // var headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    this.messages.push({
-      text: "We are retrieving your personal information",
-      sender: "api"
-    });
-    this.tts.speak({
-      text:"We are retrieving your personal information",
-      locale: "en-US",
-      rate: 1
-    });
+   // alert(purl);
+   //alert(postdata.get("image"));
+   console.log(postdata);
     return this.http.post(purl, postdata).toPromise().then(response => {
       var temp = JSON.parse(response["_body"]);
-     // console.log(temp);
-    /*   this.firstName = temp["Barcodes"][0]["Values"]["AAMVA"]["first"];
-      this.lastName = temp["Barcodes"][0]["Values"]["AAMVA"]["last"]; */
+      this.firstName = temp["Barcodes"][0]["Values"]["AAMVA"]["first"];
+      this.lastName = temp["Barcodes"][0]["Values"]["AAMVA"]["last"]; 
       this.messages.push({
         text: "As per your driving licence i see that your first name is Soumitra Would you like me to call you as Soumitra?",
         sender: "api"
@@ -174,10 +183,20 @@ export class AccountSetupPage {
   sendText(){
     let input = this.text;
     this.text = "";
-    this.messages.push({
-      text: input,
-      sender: "me"
-    });
+    if(input == "123456789"){
+      this.messages.push({
+        text: "*****6789",
+        sender: "me"
+      });
+      this.content.scrollToBottom(200);
+    }
+    else {
+      this.messages.push({
+        text: input,
+        sender: "me"
+      });
+    }
+    
     window["ApiAIPlugin"].requestText({
       query : input
     },
@@ -226,11 +245,12 @@ export class AccountSetupPage {
       }
       else if(response.result.fulfillment.speech.indexOf('iframe') >= 0){
         this.tts.speak({
-          text:"Thank you i have compared your photo on the drivers licence and it matches Could you please review your account information below",
+          text:"I have validated the information provided Could you please review the summary below",
           locale: "en-US",
           rate: 1
         });
       }
+      
       else if(response.result.fulfillment.speech.indexOf('Congratulations') >= 0){
         this.navigateAway();
        }
@@ -274,7 +294,7 @@ export class AccountSetupPage {
       }
       else if(response.result.fulfillment.speech.indexOf('iframe') >= 0){
         this.tts.speak({
-          text:"Thank you i have compared your photo on the drivers licence and it matches Could you please review your account information below",
+          text:"I have validated the information provided Could you please review the summary below",
           locale: "en-US",
           rate: 1
         });
