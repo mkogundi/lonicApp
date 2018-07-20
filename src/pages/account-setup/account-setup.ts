@@ -91,11 +91,11 @@ export class AccountSetupPage {
       setTimeout(()=>{
         this.uploadPicture = false;
         this.messages.push({
-          text: "We are retrieving your personal information",
+          text: "I am retrieving your personal information",
           sender: "api"
         });
         this.tts.speak({
-          text:"We are retrieving your personal information",
+          text:"I am retrieving your personal information",
           locale: "en-US",
           rate: 1
         });
@@ -159,11 +159,11 @@ export class AccountSetupPage {
       this.firstName = temp["Barcodes"][0]["Values"]["AAMVA"]["first"];
       this.lastName = temp["Barcodes"][0]["Values"]["AAMVA"]["last"]; 
       this.messages.push({
-        text: "As per your driving licence i see that your first name is " +this.firstName +" Would you like me to call you as "+this.firstName +"?",
+        text: "I see that your first name is " +this.firstName +" Would you like me to call you as "+this.firstName +"?",
         sender: "api"
       });
       this.tts.speak({
-        text:"As per your driving licence i see that your first name is " +this.firstName +" Would you like me to call you as "+this.firstName +"?",
+        text:"I see that your first name is " +this.firstName +" Would you like me to call you as "+this.firstName +"?",
         locale: "en-US",
         rate: 1
       });
@@ -200,14 +200,11 @@ export class AccountSetupPage {
     (response)=>{
       this.ngZone.run(()=>{    
         if(response.result.fulfillment.speech.indexOf('Personal Information') >= 0){ 
-          this.messages.push({
-            text: "Please Scan the BarCode at the back of your licence",
-            sender: "api"
-          });
+        
           this.content.scrollToBottom(200);
           this.uploadPicture = true;
         } 
-        else if(response.result.fulfillment.speech.indexOf('output1') >= 0){ 
+        else if(response.result.fulfillment.speech.indexOf('smile') >= 0){ 
           this.messages.push({
             text: "Okay,now how about a selfie with a smile",
             sender: "api"
@@ -226,14 +223,7 @@ export class AccountSetupPage {
           this.content.scrollToBottom(200);
         }
       });
-      if(response.result.fulfillment.speech.indexOf('Personal Information') >= 0){ 
-        this.tts.speak({
-          text:"Please Scan the BarCode at the back of your licence",
-          locale: "en-US",
-          rate: 1
-        });
-      }
-      else if(response.result.fulfillment.speech.indexOf('output1') >= 0){
+     if(response.result.fulfillment.speech.indexOf('smile') >= 0){
         this.tts.speak({
           text:"Okay,now how about a selfie with a smile",
           locale: "en-US",
@@ -275,14 +265,7 @@ export class AccountSetupPage {
       text: response.result.resolvedQuery,
       sender: "me"
     });
-      if(response.result.fulfillment.speech.indexOf('Personal Information') >= 0){
-        this.tts.speak({
-          text:"Please Scan the BarCode at the back of your licence",
-          locale: "en-US",
-          rate: 1
-        });
-      }
-      else if(response.result.fulfillment.speech.indexOf('output1') >= 0){
+     if(response.result.fulfillment.speech.indexOf('smile') >= 0){
         this.tts.speak({
           text:"Okay,now how about a selfie with a smile",
           locale: "en-US",
@@ -309,13 +292,10 @@ export class AccountSetupPage {
       
       this.ngZone.run(()=>{
         if(response.result.fulfillment.speech.indexOf('Personal Information') >= 0){
-          this.messages.push({
-            text: "Please Scan the BarCode at the back of your licence",
-            sender: "api"
-          });
+         
           this.uploadPicture = true;
         }
-        else if(response.result.fulfillment.speech.indexOf('output1') >= 0){ 
+        else if(response.result.fulfillment.speech.indexOf('smile') >= 0){ 
           this.messages.push({
             text: "Okay,now how about a selfie with a smile",
             sender: "api"

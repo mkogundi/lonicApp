@@ -200,35 +200,23 @@ export class SurveyPage {
         name: 'Portfolio',
         data: [
           {
-            name: 'Fixed Income',
-            y: 50,
+            name: 'Equity',
+            y: 40,
             sliced: true,
             color:'#42d4f4'
           },
           {
-            name: 'Domestic Stocks',
-            y: 14,
+            name: 'Fixed Income & Short Term',
+            y: 60,
             sliced: false,
             color:'#41f4af'
-          },
-          {
-            name: 'Short Term Investments',
-            y: 30,
-            sliced: false,
-            color:'#f2eb93'
-          },
-          {
-            name: 'Foriegn Stocks',
-            y: 6,
-            sliced: false,
-            color:'#d292f1'
-          },
+          }
         ]
       }];
       this.Result = [
-        {FundName:'Vanguard Index Fund',FundPercent:'15.90%'},
-        {FundName:'Fidelity Bond Fund',FundPercent:'15.20%'},
-        {FundName:'Fixed Income',FundPercent:'6.30%'},
+        {FundName:'Fidelity Global Bond Fund',FundPercent:'21.70%'},
+        {FundName:'Fidelity Canadian Bond Fund',FundPercent:'12.0%'},
+        {FundName:'Fidelity US All Cap Fund',FundPercent:'8.10%'},
         // {FundName:'GS Bond Fund',FundPercent:'4.8%'},
         // {FundName:'BlackRock US Growth Fund',FundPercent:'4.6%'}
       ];
@@ -238,34 +226,23 @@ export class SurveyPage {
         name: 'Portfolio',
         data: [
           {
-            name: 'Fixed Income',
-            y: 40,
-            sliced: true
+            name: 'Equity',
+            y: 60,
+            sliced: true,
+            color:'#42d4f4'
           },
           {
-            name: 'Domestic Stocks',
-            y: 35,
+            name: 'Fixed Income & Short Term',
+            y: 40,
             sliced: false,
             color:'#41f4af'
-          },
-          {
-            name: 'Short Term Investments',
-            y: 10,
-            sliced: false,
-            color:'#f2eb93'
-          },
-          {
-            name: 'Foriegn Stocks',
-            y: 15,
-            sliced: false,
-            color:'#d292f1'
-          },
+          }
         ]
       }];
       this.Result = [
-        {FundName:'Vanguard Index Fund',FundPercent:'13.20%'},
-        {FundName:'Fidelity US Stock Fund',FundPercent:'12.50%'},
-        {FundName:'GS Bond Fund',FundPercent:'9.5%'},
+        {FundName:'Fidelity Global Bond Fund',FundPercent:'13.20%'},
+        {FundName:'Fidelity Canadian Bond Fund',FundPercent:'12.50%'},
+        {FundName:'Fidelity Canadian Disciplined Equity Fund',FundPercent:'9.5%'},
         // {FundName:'Vanguard International Fund',FundPercent:'8.8%'},
         // {FundName:'BlackRock US Growth Fund',FundPercent:'7.4%'}
       ];
@@ -276,36 +253,24 @@ export class SurveyPage {
         name: 'Portfolio',
         data: [
           {
-            name: 'Fixed Income',
-            y: 30,
+            name: 'Equity',
+            y: 60,
             sliced: true,
             color:'#42d4f4'
           },
           {
-            name: 'Domestic Stocks',
-            y: 45,
+            name: 'Fixed Income & Short Term',
+            y: 40,
             sliced: false,
             color:'#41f4af'
-          },
-          {
-            name: 'Short Term Investments',
-            y: 7,
-            sliced: false,
-            color:'#f2eb93'
-          },
-          {
-            name: 'Foriegn Stocks',
-            y: 18,
-            sliced: false,
-            color:'#d292f1'
-          },
+          }
         ]
       }];
       this.Result = [
-        {FundName:'Fidelity Bond Fund',FundPercent:'17.3%'},
-        {FundName:'GS Bond Fund',FundPercent:'8.90%'},
-        {FundName:'Fidelity US Stock Fund',FundPercent:'8.2%'},
-        // {FundName:'GS Bond Fund',FundPercent:'4.8%'},
+        {FundName:'Fidelity Global Bond Fund',FundPercent:'18.60%'},
+        {FundName:'Fidelity Emerging Markets Fund',FundPercent:'8.80%'},
+        {FundName:'Fidelity Int. Growth Inv Trust',FundPercent:'8.20%'},
+        // {FundName:'GS Bond Fund',FundPercent:'4.8%'},.
         // {FundName:'BlackRock US Growth Fund',FundPercent:'4.6%'}
       ];
     }
@@ -315,35 +280,23 @@ export class SurveyPage {
         name: 'Portfolio',
         data: [
           {
-            name: 'Fixed Income',
-            y: 25,
+            name: 'Equity',
+            y: 85,
             sliced: true,
             color:'#42d4f4'
           },
           {
-            name: 'Domestic Stocks',
-            y: 49,
+            name: 'Fixed Income & Short Term',
+            y: 15,
             sliced: false,
             color:'#41f4af'
-          },
-          {
-            name: 'Short Term Investments',
-            y: 5,
-            sliced: false,
-            color:'#f2eb93'
-          },
-          {
-            name: 'Foriegn Stocks',
-            y: 21,
-            sliced: false,
-            color:'#d292f1'
-          },
+          }
         ]
       }];
       this.Result = [
-        {FundName:'Fidelity US Fund',FundPercent:'13.8%'},
-        {FundName:'Vanguard Int. Fund',FundPercent:'13.6%'},
-        {FundName:'WFargo Growth Fund',FundPercent:'10.8%'},
+        {FundName:'Fidelity True North Fund',FundPercent:'18.80%'},
+        {FundName:'Fidelity Canadian Disciplined Equity Fund',FundPercent:'13.6%'},
+        {FundName:'Fidelity Int. Growth Inv Trust',FundPercent:'10.8%'},
         // {FundName:'GS Bond Fund',FundPercent:'4.8%'},
         // {FundName:'BlackRock US Growth Fund',FundPercent:'4.6%'}
       ];
@@ -354,35 +307,23 @@ export class SurveyPage {
         name: 'Portfolio',
         data: [
           {
-            name: 'Fixed Income',
-            y: 15,
+            name: 'Equity',
+            y: 85,
             sliced: true,
             color:'#42d4f4'
           },
           {
-            name: 'Domestic Stocks',
-            y: 59,
+            name: 'Fixed Income & Short Term',
+            y: 15,
             sliced: false,
             color:'#41f4af'
-          },
-          {
-            name: 'Short Term Investments',
-            y: 1,
-            sliced: false,
-            color:'#f2eb93'
-          },
-          {
-            name: 'Foriegn Stocks',
-            y: 25,
-            sliced: false,
-            color:'#d292f1'
-          },
+          }
         ]
       }];
       this.Result = [
-        {FundName:'WFargo Growth Fund',FundPercent:'17.3%'},
-        {FundName:'Schwa Emerging ETF',FundPercent:'10.8%'},
-        {FundName:'Fidelity Emerging Mkt',FundPercent:'9.6%'},
+        {FundName:'Fidelity Int. Growth Inv Trust',FundPercent:'17.10%'},
+        {FundName:'Fidelity Emerging Markets Fund',FundPercent:'10.80%'},
+        {FundName:'Fidelity Focused U.S. Stock Fund',FundPercent:'9.6%'},
         // {FundName:'Fidelity US Focused Stock Fund',FundPercent:'4.8%'},
         // {FundName:'BlackRock US Growth Fund',FundPercent:'4.6%'}
       ];
@@ -399,7 +340,8 @@ export class SurveyPage {
         title: {
           text: 'Recommended Portfolio',
           style:{
-            fontSize:'12px'
+            fontSize:'14px',
+            fontWeight: 'bold'
           }
         },
         xAxis: {
@@ -425,11 +367,12 @@ export class SurveyPage {
               },
               color:'black',
               shadow:false,
-              distance: -30,
+              distance: -15,
               style:{
                 textOutline:false
               }
-            }
+            },
+            showInLegend: true
           }
         },
         credits: {

@@ -30,7 +30,7 @@ export class MyApp {
       splashScreen.hide();
        window["ApiAIPlugin"].init(
         {
-            clientAccessToken: "697a929cd7574ca49cff4da2a43c6025", // insert your client access key here
+            clientAccessToken: "a2471a4e00b94d4dbece404b55f842f8", // insert your client access key here
             lang: "en" // set lang tag from list of supported languages
         }, 
         function(result) {  },
