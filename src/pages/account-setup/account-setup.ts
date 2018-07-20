@@ -83,14 +83,11 @@ export class AccountSetupPage {
       quality: 100,
       allowEdit: false,
       correctOrientation: false,
-      saveToPhotoAlbum: true,
-      encodingType:0
-      // mediaType: 0
+      saveToPhotoAlbum: true
     };
     this.camera.getPicture(options)
     .then((imageData)=>{
-     // console.log(imageData);
-      this.base64Image = "data:image/jpeg;base64," + imageData;
+      this.base64Image = "data:image/jpeg;base64,"+imageData;
       setTimeout(()=>{
         this.uploadPicture = false;
         this.messages.push({
@@ -105,17 +102,17 @@ export class AccountSetupPage {
       },2000)
       //this.callApiForDriverDetails();
      // alert(imageData);
-      var formData = new FormData();
+     
       this.http.get('base64Data.txt').subscribe(data => {
-        console.log(data.text());
+        var formData = new FormData()
         formData.append('image',data.text());
 
-      this.postIt(this.licenseUrl,formData);
+        this.postIt(this.licenseUrl,formData);
       })
-     /*  formData.append('file',imageData);
-
-      this.postIt(this.licenseUrl,formData); */
       
+     /*  var formData = new FormData();
+      formData.append('image',imageData);
+      this.postIt(this.licenseUrl,formData); */
     })
     .catch(err=>{
       console.log(err);
@@ -162,11 +159,11 @@ export class AccountSetupPage {
       this.firstName = temp["Barcodes"][0]["Values"]["AAMVA"]["first"];
       this.lastName = temp["Barcodes"][0]["Values"]["AAMVA"]["last"]; 
       this.messages.push({
-        text: "As per your driving licence i see that your first name is Soumitra Would you like me to call you as Soumitra?",
+        text: "As per your driving licence i see that your first name is " +this.firstName +" Would you like me to call you as "+this.firstName +"?",
         sender: "api"
       });
       this.tts.speak({
-        text:"As per your driving licence i see that your first name is Soumitra Would you like me to call you as Soumitra?",
+        text:"As per your driving licence i see that your first name is " +this.firstName +" Would you like me to call you as "+this.firstName +"?",
         locale: "en-US",
         rate: 1
       });
