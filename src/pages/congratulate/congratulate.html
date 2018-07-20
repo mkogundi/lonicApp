@@ -23,7 +23,7 @@
         <h2 class="headingTitle">Welcome John</h2>
       </ion-item>
     
-      <img src="assets/Invest.jpg">
+      <img src="assets/investment2.jpg">
     
       <ion-card-content>
         <p class="congratulate" *ngIf="screen != 'thanks' && screen != 'orderplaced' &&screen != 'alreadyLoggedIn'">Congratulations,Your Brokerage account 214123456 is Active! You can now try our managed Services or fund your account </p>
@@ -31,13 +31,16 @@
         <p class="congratulate" *ngIf="screen == 'orderplaced'">Your Order has been placed successfully</p>
         <p class="congratulate" *ngIf="screen == 'alreadyLoggedIn'">What would you want to do today!</p>
       </ion-card-content>
-    
+      
       <ion-row style="margin-left: 35px;">
         <ion-col>
-          <button ion-button icon-start clear small>
-            <div>Lend/Borrow</div>
+          <button ion-button icon-start clear small (click)="transferAssets()">
+            <div>Transfer of Assets</div>
           </button>
         </ion-col>
+      </ion-row>
+
+      <ion-row style="margin-left: 35px;">
         <ion-col>
           <button ion-button icon-start clear small>
             <!-- <ion-icon name="thumbs-up"></ion-icon> -->
@@ -53,13 +56,16 @@
         </ion-col> -->
       </ion-row>
 
-      <ion-row center text-center>
-          <ion-col>
-            <button ion-button icon-start clear small (click)="transferAssets()">
-              <div>Transfer of Assets</div>
-            </button>
-          </ion-col>
+      <ion-row style="margin-left: 35px;">
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <div>Lend/Borrow</div>
+          </button>
+        </ion-col>
       </ion-row>
+
+
+
     
     </ion-card>
 
