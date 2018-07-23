@@ -223,7 +223,12 @@ export class AccountSetupPage {
           this.content.scrollToBottom(200);
         }
       });
-     if(response.result.fulfillment.speech.indexOf('smile') >= 0){
+      if(response.result.fulfillment.speech.indexOf('Personal Information') >= 0){ 
+        
+        //this.content.scrollToBottom(200);
+       // this.uploadPicture = true;
+      }  
+     else if(response.result.fulfillment.speech.indexOf('smile') >= 0){
         this.tts.speak({
           text:"Okay,now how about a selfie with a smile",
           locale: "en-US",
@@ -265,7 +270,12 @@ export class AccountSetupPage {
       text: response.result.resolvedQuery,
       sender: "me"
     });
-     if(response.result.fulfillment.speech.indexOf('smile') >= 0){
+    if(response.result.fulfillment.speech.indexOf('Personal Information') >= 0){ 
+        
+      //this.content.scrollToBottom(200);
+     // this.uploadPicture = true;
+    }  
+   else if(response.result.fulfillment.speech.indexOf('smile') >= 0){
         this.tts.speak({
           text:"Okay,now how about a selfie with a smile",
           locale: "en-US",
@@ -300,12 +310,15 @@ export class AccountSetupPage {
             text: "Okay,now how about a selfie with a smile",
             sender: "api"
           });
+          this.uploadPicture = false;
           this.uploadSelfie = true;
         }
         else if(response.result.fulfillment.speech.indexOf('Congratulations') >= 0){
           this.navigateAway();
          }
         else{
+          this.uploadPicture = false;
+          this.uploadSelfie = false;
           this.messages.push({
             text: response.result.fulfillment.speech,
             sender: "api"

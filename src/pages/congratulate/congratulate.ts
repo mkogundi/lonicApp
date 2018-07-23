@@ -30,8 +30,10 @@ export class CongratulatePage {
     this.navCtrl.setRoot(LinkPage);
   }
 
-  openSurvey() {
-    this.navCtrl.setRoot(SurveyPage)
+  openSurvey(redirectTo) {
+    this.navCtrl.setRoot(SurveyPage,{
+      data:redirectTo
+    });
   }
 
 }

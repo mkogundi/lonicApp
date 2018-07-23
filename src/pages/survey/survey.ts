@@ -101,15 +101,35 @@ export class SurveyPage {
   ];
   SelectIcon: String = "thumbs-up";
   SurveyAnswer: number = 0;
+  moveToSlide = "";
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.moveToSlide = this.navParams.get('data');
+    
   }
 
   ionViewDidLoad() {
+    if(this.moveToSlide == 'basic'){
+
+      setTimeout(()=>{    
+        this.slidesquestion.slideTo(0, 500);
+      },100);
+
+      
+    }
+    else if(this.moveToSlide == 'invest') {
+
+      setTimeout(()=>{    
+        this.slidesquestion.slideTo(6,2000);
+      },100);
+
+     
+    }
     console.log('ionViewDidLoad SurveyPage');
   }
 
   ShowNextSlide() {
     this.slidesquestion.slideNext();
+    console.log(this.slidesquestion.clickedIndex);
   }
 
   ShowPreviousSlide() {

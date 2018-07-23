@@ -44,7 +44,7 @@
         <ion-col>
           <button ion-button icon-start clear small>
             <!-- <ion-icon name="thumbs-up"></ion-icon> -->
-            <div (click)="openSurvey()">Invest</div>
+            <div (click)="openSurvey('invest')">Invest</div>
           </button>
         </ion-col>
        
@@ -63,6 +63,14 @@
           </button>
         </ion-col>
       </ion-row>
+
+      <ion-row style="margin-left: 35px;">
+          <ion-col>
+            <button ion-button icon-start clear small>
+              <div (click)="openSurvey('basic')" >Launch Survey</div>
+            </button>
+          </ion-col>
+        </ion-row>
 
 
 
