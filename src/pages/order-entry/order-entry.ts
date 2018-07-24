@@ -24,6 +24,7 @@ export class OrderEntryPage {
   
   messages: any[]= [];
   text: string = "";
+  confirmOrder = false;
   @ViewChild(Content) content: Content;
   @ViewChild('uploadPictureDiv', { read: ElementRef }) uploadPictureDiv:ElementRef;
   
@@ -114,7 +115,7 @@ export class OrderEntryPage {
             sender: "api"
           });
         }
-        else if(response.result.fulfillment.speech.indexOf('market') >= 0 || response.result.fulfillment.speech.indexOf('Market') >= 0 ){
+        else if(input.indexOf('market') >= 0 || input.indexOf('Market') >= 0 ){
           this.http.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=TSLA&interval=1min&apikey=X9EBN7HTIC5W6TE1').map(res => res.json()).subscribe(data => {
   
             let Quantity = 20;
@@ -127,19 +128,20 @@ export class OrderEntryPage {
               text: this.statement,
               sender: "api"
             });
-
-            setTimeout(()=>{
-              this.showFingerPrintDailog();
-            },2000)
+            
+            this.confirmOrder = true;
             //alert(this.statement);
         });
         }
         else if(response.result.resolvedQuery.indexOf('looks good') >= 0){
-          this.messages.push({
+         /*  this.messages.push({
             text: "Your Order has been placed successfully",
             sender: "api"
-          });
-          this.navigateAway();
+          }); */
+          this.confirmOrder = false;
+          this.showFingerPrintDailog();
+         // this.navigateAway();
+         // this.navigateAway();
         }
         else {
           this.messages.push({
@@ -175,12 +177,13 @@ export class OrderEntryPage {
       });
       }
       else if(response.result.resolvedQuery.indexOf('looks good') >= 0){
-        this.tts.speak({
+       /*  this.tts.speak({
           text:"Your Order has been placed successfully",
           locale: "en-US",
           rate: 1
-        });
-        this.navigateAway();
+        }); */
+       
+       
       }  
     },
     (error)=>{
@@ -205,7 +208,7 @@ export class OrderEntryPage {
             locale: "en-US",
             rate: 1
           });
-          this.navCtrl.push(CongratulatePage);
+          this.navCtrl.push(CongratulatePage,{data:'orderplaced'});
           }
         }
     } catch (error) {
@@ -228,7 +231,7 @@ export class OrderEntryPage {
           rate: 1
         });  
       }
-      else if(response.result.fulfillment.speech.indexOf('market') >= 0){
+      else if(response.result.resolvedQuery.indexOf('market') >= 0 ||response.result.resolvedQuery.indexOf('Market') >= 0 ){
         this.http.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=TSLA&interval=1min&apikey=X9EBN7HTIC5W6TE1').map(res => res.json()).subscribe(data => {
 
           let Quantity = 20;
@@ -242,16 +245,26 @@ export class OrderEntryPage {
             locale: "en-US",
             rate: 1
           });
+          this.messages.push({
+            text: this.statement ,
+            sender: "api"
+          });
+
+          this.confirmOrder = true;
+         
           //alert(this.statement);
       });
       }
       else if(response.result.resolvedQuery.indexOf('looks good') >= 0){
-        this.tts.speak({
+       /*  this.tts.speak({
           text:"Your Order has been placed successfully",
           locale: "en-US",
           rate: 1
         });
-        this.navigateAway();
+        setTimeout(()=>{
+          this.showFingerPrintDailog();
+        },2000);
+        this.navigateAway(); */
       }
       else{
         this.tts.speak({
@@ -268,7 +281,7 @@ export class OrderEntryPage {
             sender: "api"
           });
         }
-        else if(response.result.fulfillment.speech.indexOf('market') >= 0){
+        else if(response.result.resolvedQuery.indexOf('market') >= 0 ||response.result.resolvedQuery.indexOf('Market') >= 0 ){
           this.http.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=TSLA&interval=1min&apikey=X9EBN7HTIC5W6TE1').map(res => res.json()).subscribe(data => {
   
             let Quantity = 20;
@@ -282,16 +295,19 @@ export class OrderEntryPage {
               sender: "api"
             });
 
-            this.showFingerPrintDailog();
+           
             //alert(this.statement);
         });
         }
         else if(response.result.resolvedQuery.indexOf('looks good') >= 0){
-          this.messages.push({
+         /*  this.messages.push({
             text: "Your Order has been placed successfully",
             sender: "api"
-          });
-          this.navigateAway();
+          }); */
+          this.confirmOrder = false;
+          this.showFingerPrintDailog();
+         // this.navigateAway();
+
         }
         else{
           this.messages.push({

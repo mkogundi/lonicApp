@@ -26,9 +26,10 @@
       <img src="assets/investment2.jpg">
     
       <ion-card-content>
-        <p class="congratulate" *ngIf="screen != 'thanks' && screen != 'orderplaced' &&screen != 'alreadyLoggedIn'">Congratulations,Your Brokerage account 214123456 is Active! You can now try our managed Services or fund your account </p>
+        <p class="congratulate" *ngIf="screen != 'thanks' && screen != 'orderplaced' &&screen != 'alreadyLoggedIn' && screen != 'startInvesting'">Congratulations,Your Managed account 214123456 is Active! You can now try our managed Services or fund your account </p>
         <p class="congratulate" *ngIf="screen == 'thanks'">Thanks For linking your account. Try investing funds now </p>
         <p class="congratulate" *ngIf="screen == 'orderplaced'">Your Order has been placed successfully</p>
+        <p class="congratulate" *ngIf="screen == 'startInvesting'">Your funds have been invested</p>
         <p class="congratulate" *ngIf="screen == 'alreadyLoggedIn'">What would you want to do today!</p>
       </ion-card-content>
       
@@ -44,7 +45,7 @@
         <ion-col>
           <button ion-button icon-start clear small>
             <!-- <ion-icon name="thumbs-up"></ion-icon> -->
-            <div (click)="openSurvey('invest')">Invest</div>
+            <div (click)="openSurvey('basic')">Invest</div>
           </button>
         </ion-col>
        
@@ -64,13 +65,13 @@
         </ion-col>
       </ion-row>
 
-      <ion-row style="margin-left: 35px;">
+      <!-- <ion-row style="margin-left: 35px;">
           <ion-col>
             <button ion-button icon-start clear small>
               <div (click)="openSurvey('basic')" >Launch Survey</div>
             </button>
           </ion-col>
-        </ion-row>
+        </ion-row> -->
 
 
 

@@ -151,12 +151,12 @@
           </p>
         </ion-item>
       </ion-list>
-      <button ion-button small full icon-end color="primary" [hidden]="ShowPortfolioRecommendation">
+      <button ion-button small full icon-end color="primary" [hidden]="ShowPortfolioRecommendation" (click)="confirmInvest('orderEntry')" >
           Start to Trade
           <ion-icon name="arrow-forward"></ion-icon>
       </button>
-      <button ion-button small full icon-end color="secondary" [hidden]="!ShowPortfolioRecommendation" (click)="placeOrder()">
-          Continue
+      <button ion-button small full icon-end color="secondary" [hidden]="!ShowPortfolioRecommendation" (click)="confirmInvest('sendToHome')">
+          Invest in this Portfolio
         <ion-icon name="arrow-forward"></ion-icon>
       </button>
       <p style="font-size: 10px;">

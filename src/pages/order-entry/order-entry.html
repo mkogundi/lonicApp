@@ -25,6 +25,10 @@
         <img [src]=[base64Selfie] *ngIf="base64Selfie" />
     </div> 
 
+    <div *ngIf="confirmOrder">
+        <iframe src='order-entry.html' name = 'myFrame' width='250' height='400' frameborder='0' marginheight='5' marginwidth='15'></iframe>
+    </div>
+
 </ion-content>
 
 <ion-footer>

@@ -159,15 +159,16 @@ export class AccountSetupPage {
       this.firstName = temp["Barcodes"][0]["Values"]["AAMVA"]["first"];
       this.lastName = temp["Barcodes"][0]["Values"]["AAMVA"]["last"]; 
       this.messages.push({
-        text: "I see that your first name is " +this.firstName +" Would you like me to call you as "+this.firstName +"?",
+        text: "I see that your full name is " +this.firstName + this.lastName +" Now could you please take a selfie ?",
         sender: "api"
       });
       this.tts.speak({
-        text:"I see that your first name is " +this.firstName +" Would you like me to call you as "+this.firstName +"?",
+        text:"I see that your full name is " +this.firstName + this.lastName +" Now could you please take a selfie ?",
         locale: "en-US",
         rate: 1
       });
       this.uploadPicture = false;
+      this.uploadSelfie = true;
     });
   }
 

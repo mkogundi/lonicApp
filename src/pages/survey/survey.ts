@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, Platform } from 'ionic-angular';
 import * as HighCharts from 'highcharts';
 import { OrderEntryPage } from '../order-entry/order-entry';
+import { FingerprintAIO, FingerprintOptions } from '../../../node_modules/@ionic-native/fingerprint-aio';
+import { CongratulatePage } from '../congratulate/congratulate';
 /**
  * Generated class for the SurveyPage page.
  *
@@ -16,6 +18,7 @@ import { OrderEntryPage } from '../order-entry/order-entry';
 })
 export class SurveyPage {
   @ViewChild(Slides) slidesquestion: Slides;
+  fingerprintOptions: FingerprintOptions;
   InvestorType: String = 'Based on the survey result we categorize your investment profile as';
   portfolioseries: any = [];
   portfoliochart: any;
@@ -102,9 +105,14 @@ export class SurveyPage {
   SelectIcon: String = "thumbs-up";
   SurveyAnswer: number = 0;
   moveToSlide = "";
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private platform: Platform,private fingerprint: FingerprintAIO) {
     this.moveToSlide = this.navParams.get('data');
     
+    this.fingerprintOptions = {
+      clientId: 'IonicAI',
+      clientSecret: 'password',
+      disableBackup: true
+    };
   }
 
   ionViewDidLoad() {
@@ -135,6 +143,30 @@ export class SurveyPage {
   ShowPreviousSlide() {
     this.slidesquestion.slidePrev();
   }
+
+  confirmInvest(navigateTo) {
+    if(navigateTo == 'orderEntry')
+      this.navCtrl.push(OrderEntryPage);
+    else if(navigateTo == 'sendToHome')  
+      this.showFingerPrintDailog();
+  }
+
+  async showFingerPrintDailog(){
+    try {
+        await this.platform.ready();
+        const available = await this.fingerprint.isAvailable();
+        if(available === 'finger'){
+          const result = await this.fingerprint.show(this.fingerprintOptions);
+          if (result != ''){
+            this.navCtrl.push(CongratulatePage,{data:'startInvesting'});
+          }
+        }
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
+
   ShowSurveyResult() {
     console.log(this.slides);
     console.log(this.AccountType);
@@ -404,7 +436,8 @@ export class SurveyPage {
   }
 
   placeOrder(){
-    this.navCtrl.push(OrderEntryPage);
+   // this.navCtrl.push(OrderEntryPage);
+    this.showFingerPrintDailog();
   }
 
   // SwitchAnswer() {
