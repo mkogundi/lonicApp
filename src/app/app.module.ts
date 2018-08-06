@@ -5,8 +5,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { GooglePlus } from '@ionic-native/google-plus';
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 import { MyApp } from './app.component';
@@ -22,6 +26,8 @@ import { LinkPage } from '../pages/link/link';
 import { SurveyPage } from '../pages/survey/survey';
 import { OrderEntryPage } from '../pages/order-entry/order-entry';
 import { HttpModule } from '@angular/http';
+import { Portfolio } from '../pages/portfolio/portfolio';
+import { AccountOpenPage } from '../pages/account-open/account-open';
 
 @NgModule({
   declarations: [
@@ -34,11 +40,17 @@ import { HttpModule } from '@angular/http';
     CongratulatePage,
     LinkPage,
     SurveyPage,
-    OrderEntryPage
+    OrderEntryPage,
+    Portfolio,
+    AccountOpenPage
   ],
   imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
+    BrowserModule, 
+    IonicModule.forRoot(MyApp, {
+      scrollPadding: false,
+      scrollAssist: true,
+      autoFocusAssist: false
+    }), 
     BrowserAnimationsModule,
     HttpModule
   ],
@@ -52,11 +64,13 @@ import { HttpModule } from '@angular/http';
     CongratulatePage,
     LinkPage,
     SurveyPage,
-    OrderEntryPage
+    OrderEntryPage,
+    Portfolio,
+    AccountOpenPage
   ],
   providers: [
     StatusBar,
-    SplashScreen,TextToSpeech,Camera,FingerprintAIO,SpeechRecognition,
+    SplashScreen,TextToSpeech,Camera,FingerprintAIO,SpeechRecognition,InAppBrowser,File,GooglePlus,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

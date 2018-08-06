@@ -7,6 +7,9 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { IntroPage } from '../pages/Intro/intro';
 import { CongratulatePage } from '../pages/congratulate/congratulate';
+import { SurveyPage } from '../pages/survey/survey';
+import { Portfolio } from '../pages/portfolio/portfolio';
+import { OrderEntryPage } from '../pages/order-entry/order-entry';
 
 declare var window;
 
@@ -40,8 +43,12 @@ export class MyApp {
     
   // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: ListPage },
-      { title: 'EVA', component: HomePage }
+      { title: 'Home', component: CongratulatePage },
+      { title: 'Invest', component: SurveyPage },
+      { title: 'Portfolio', component: Portfolio },
+      { title: 'Order', component: OrderEntryPage },
+      { title: 'P2P', component: '' },
+      { title: 'ActualHome', component: HomePage}
     ];
   }
 

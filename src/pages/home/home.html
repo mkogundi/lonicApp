@@ -4,39 +4,34 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      EVA
+      Simplifid
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list no-lines class="chat-list" text-wrap>
-    <ion-item #addMessage class="chat-item" *ngFor="let message of messages">
-      <ion-avatar item-left *ngIf="message.sender == 'api'">
-        <img src="assets/apiai.png" alt="">
-      </ion-avatar>
-      <ion-avatar item-right *ngIf="message.sender == 'me'">
-        <img src="assets/ionic.png" alt="">
-      </ion-avatar>
-      <div *ngIf="message.sender == 'api'" class="bubble me" [innerHTML]="message.text">
-      </div>
-      <div *ngIf="message.sender == 'me'" class="bubble you" [innerHTML]="message.text">
-      </div> 
-    </ion-item>
-  </ion-list>
+<ion-content padding style="background: url('assets/backgroundRed.jpg') no-repeat">
+    <ion-list>
+        <ion-item >
+          <h3>S&P 500 heads for five straight weeks of gains</h3>
+          <p>The retail war is expanding to cloud computing, grocery delivery, and streaming video.</p>
+        </ion-item>
+        <ion-item>
+          <h3>Amazon and Walmart’s rivalry is reshaping how we’ll buy everything in the future </h3>
+          <p>Wall Street was higher on Friday, with the S&P headed for its longest weekly winning streak since December.</p>
+        </ion-item>
+        <ion-item>
+          <h3>Jobs Report Looks Solid Despite Slowdown in July Growth</h3>
+          <p>July’s job growth fell short of expectations, but there’s still a lot to like about Friday’s monthly payrolls report. </p>
+        </ion-item>
+        <ion-item>
+          <h3>Apple is first public company worth $1 trillion –</h3>
+          <p>The iPhone maker's market value reached the figure in New York on Thursday and its shares closed at a new record high of $207.39.</p>
+        </ion-item>
+        <ion-item>
+          <h3>Samsung Saw Poor Smartphone Sales, but Its Chip Division Grew</h3>
+          <p>Samsung saw underwhelming growth in the second quarter.</p>
+        </ion-item>
+      </ion-list>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-item>
-      <ion-input type="text" #input placeholder="Your Message Here.." [(ngModel)]="text"></ion-input>
-      <button ion-button icon-only item-right clear (click)="sendText();input.setFocus()">
-        <ion-icon name="send"></ion-icon>
-      </button>
-      <button ion-button icon-only item-right clear (click)="sendVoice()">
-        <ion-icon name="mic"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-toolbar>
-</ion-footer>
 

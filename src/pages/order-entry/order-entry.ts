@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, Content, Platform } from 'ionic-an
 import { Camera } from '../../../node_modules/@ionic-native/camera';
 import { TextToSpeech } from '../../../node_modules/@ionic-native/text-to-speech';
 import { CongratulatePage } from '../congratulate/congratulate';
-import { Http } from '@angular/http';
+import { Http, RequestOptions,Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { FingerprintAIO, FingerprintOptions } from '../../../node_modules/@ionic-native/fingerprint-aio';
 
@@ -133,15 +133,13 @@ export class OrderEntryPage {
             //alert(this.statement);
         });
         }
-        else if(response.result.resolvedQuery.indexOf('looks good') >= 0){
-         /*  this.messages.push({
-            text: "Your Order has been placed successfully",
-            sender: "api"
-          }); */
+        else if(response.result.resolvedQuery.indexOf('looks good') >= 0 || 
+        response.result.resolvedQuery.indexOf('Looks good') >= 0 || 
+        response.result.fulfillment.speech.indexOf('authenticate') >= 0 ){
+       
           this.confirmOrder = false;
           this.showFingerPrintDailog();
-         // this.navigateAway();
-         // this.navigateAway();
+       
         }
         else {
           this.messages.push({
@@ -202,13 +200,60 @@ export class OrderEntryPage {
         if(available === 'finger'){
           const result = await this.fingerprint.show(this.fingerprintOptions);
           if (result != ''){
+
            
-           this.tts.speak({
-            text:"Your Order has been placed successfully",
-            locale: "en-US",
-            rate: 1
-          });
-          this.navCtrl.push(CongratulatePage,{data:'orderplaced'});
+            let url = "https://INDV920121:8443/createOrder"
+            let headers = new Headers(
+              {
+                'Content-Type' : 'application/json'
+              });
+              let options = new RequestOptions({ headers: headers });
+              
+              let data = JSON.stringify({ "request":{
+                CL: "1",
+                format: "json",
+                reqType:"N",
+                acctNum:"X30000647",
+                baseOrderDetail:{
+                  secDetail:{
+                    symbol: "TSLA"
+                  },
+                  acctTypeCode:"C",
+                  orderAction:"Buy",
+                  qty:"20",
+                  qtyTypeCode:"S"
+                },
+                tradableSecOrderDetail:{
+                  tifCode:"D",
+                  priceTypeDetail:{
+                    priceTypeCode:"M"
+                  }
+                } 
+              }
+            });
+              
+             
+              this.http.post(url,data,options).subscribe( res => {
+                let orderNumber= res.json();
+        
+                setTimeout(()=>{
+                  this.navCtrl.push(CongratulatePage,{orderNumber:orderNumber.orderConfirmDetail.confNum,data:'orderplaced'});
+                },2000);
+
+                this.tts.speak({
+                  text:"Your Order has been placed successfully",
+                  locale: "en-US",
+                  rate: 1
+                });
+        
+              },
+            err => {
+              this.navCtrl.push(CongratulatePage,{orderNumber:'#G31BBBBZ',data:'orderplaced'});
+            })
+           
+          
+
+
           }
         }
     } catch (error) {
@@ -299,12 +344,18 @@ export class OrderEntryPage {
             //alert(this.statement);
         });
         }
-        else if(response.result.resolvedQuery.indexOf('looks good') >= 0){
+        else if(response.result.resolvedQuery.indexOf('Looks good') >= 0 || 
+        response.result.resolvedQuery.indexOf('looks good') >= 0  ||
+        response.result.resolvedQuery.indexOf('authenticate') >= 0 ){
          /*  this.messages.push({
             text: "Your Order has been placed successfully",
             sender: "api"
           }); */
           this.confirmOrder = false;
+
+
+
+
           this.showFingerPrintDailog();
          // this.navigateAway();
 

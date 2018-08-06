@@ -28,15 +28,16 @@ p {
 
 .swiper-pagination-bullet-active {
     background:#f4f4f4;
+    
 }
 
 .swiper-pagination {
-    bottom: 25% !important;
+    bottom: 30% !important;
 }
 
 #skip {
     position:absolute;
-    bottom: 17%;
+    bottom: 22%;
     width:75%;
     text-align: center;
     cursor: pointer;
@@ -47,6 +48,17 @@ p {
 #accountSetup{
     position: absolute;
     bottom: 10%;
+    margin: 0 15%;
+    background: none;
+    color:#fff;
+    cursor: pointer;
+    z-index: 5;
+    width:70%;
+}
+
+#gmaillogin{
+    position: absolute;
+    bottom: 17%;
     margin: 0 15%;
     background: none;
     color:#fff;

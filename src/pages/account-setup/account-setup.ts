@@ -1,10 +1,13 @@
 import { Component,NgZone, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams,Content } from 'ionic-angular';
 import { Camera} from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { CongratulatePage } from '../congratulate/congratulate';
-import {Http, Response} from '@angular/http';
+import {Http, Response, RequestOptions,Headers} from '@angular/http';
+import { AccountOpenPage } from '../account-open/account-open';
 declare var window;
+declare var cordova;
 /**
  * Generated class for the AccountSetupPage page.
  *
@@ -25,7 +28,7 @@ export class AccountSetupPage {
   @ViewChild('uploadPictureDiv', { read: ElementRef }) uploadPictureDiv:ElementRef;
   
   
-  constructor(public navCtrl: NavController,private elRef:ElementRef, public navParams: NavParams,private camera: Camera,public ngZone: NgZone,public tts:TextToSpeech,private http:Http) {
+  constructor(public navCtrl: NavController,private elRef:ElementRef, public navParams: NavParams,public camera: Camera,public ngZone: NgZone,public tts:TextToSpeech,private http:Http,public file:File) {
     this.messages.push({
       text: "Hi, how can i help you?",
       sender: "api"
@@ -36,6 +39,8 @@ export class AccountSetupPage {
   public base64Selfie: string;
   public uploadPicture: boolean = false;
   public uploadSelfie: boolean = false;
+
+  public  imageUrl: string;
   
   takeSelfie(){
     this.content.scrollToBottom(200);
@@ -74,20 +79,88 @@ export class AccountSetupPage {
 
   public licenseUrl = 'https://wabr.inliteresearch.com/barcodes';
 
+
   takePicture(){
     this.content.scrollToBottom(200);
     let options = {
-      destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: 300,
       targetHeight: 300,
       quality: 100,
       allowEdit: false,
-      correctOrientation: false,
-      saveToPhotoAlbum: true
+      correctOrientation: true,
+      encodingType:this.camera.EncodingType.JPEG
     };
     this.camera.getPicture(options)
     .then((imageData)=>{
-      this.base64Image = "data:image/jpeg;base64,"+imageData;
+     // console.log(imageData);
+     const currentName = imageData.replace(/^.*[\\\/]/,'');
+     const path = imageData.replace(/[^\/]*$/,'');
+     this.file.moveFile(path,currentName,cordova.file.externalRootDirectory,currentName)
+     .then(
+       data => {
+        console.log(cordova.file.externalRootDirectory);
+        this.base64 = data.nativeURL;
+        let new_path = this.base64.substring(this.base64.indexOf('s'))
+        console.log(new_path);
+        var formData = new FormData();
+
+        setTimeout(()=>{
+          formData.append('url', "https://wabr.inliteresearch.com/SampleImages/1d.pdf");
+          this.postIt(this.licenseUrl, formData); 
+        },5000);
+
+       
+
+        var reader = new FileReader();
+  
+          /*   reader.onload = (event: ProgressEvent) => {
+              this.base64 = (<FileReader>event.target).result;
+              console.log(this.base64);
+              var formData = new FormData();
+              formData.append('image', this.base64);
+             this.postIt(this.licenseUrl, formData); 
+            }
+        
+            reader.readAsDataURL(data); */
+
+       /*  this.file.readAsArrayBuffer(cordova.file.dataDirectory, currentName).then( 
+          (res) =>{
+            let blob = new Blob([res], {type: "image/jpeg"});
+            var reader = new FileReader();
+  
+            reader.onload = (event: ProgressEvent) => {
+              this.base64 = (<FileReader>event.target).result;
+              console.log(this.base64);
+              var formData = new FormData();
+              formData.append('image', this.base64);
+             this.postIt(this.licenseUrl, formData); 
+            }
+        
+            reader.readAsDataURL(blob);
+           
+          }) */
+      
+
+       
+        /*  this.file.readAsDataURL(cordova.file.dataDirectory,currentName)
+         .then(
+           file64 => {
+             console.log(file64);
+
+             var formData = new FormData();
+             formData.append('image', file64);
+             this.postIt(this.licenseUrl, formData);
+           }
+         ) */
+       }
+     )
+     .catch(
+       err =>{
+         alert("couldnt save the image");
+       }
+     )
+      this.imageUrl = imageData;
+     // this.base64Image = "data:image/jpeg;base64,"+imageData;
       setTimeout(()=>{
         this.uploadPicture = false;
         this.messages.push({
@@ -103,12 +176,12 @@ export class AccountSetupPage {
       //this.callApiForDriverDetails();
      // alert(imageData);
      
-      this.http.get('base64Data.txt').subscribe(data => {
+     /*  this.http.get('base64Data.txt').subscribe(data => {
         var formData = new FormData()
         formData.append('image',data.text());
 
         this.postIt(this.licenseUrl,formData);
-      })
+      }) */
       
      /*  var formData = new FormData();
       formData.append('image',imageData);
@@ -129,11 +202,14 @@ export class AccountSetupPage {
   public base64: any;
   
     onFileChange(event) {
+    console.log(event);  
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
   
       reader.onload = (event: ProgressEvent) => {
         this.base64 = (<FileReader>event.target).result;
+
+        console.log(event.target);
       }
   
       reader.readAsDataURL(event.target.files[0]);
@@ -147,7 +223,7 @@ export class AccountSetupPage {
     formData.append('image', this.base64);
    // alert(this.base64);
     console.log(formData);
-    this.postIt(this.licenseUrl, formData);
+   this.postIt(this.licenseUrl, formData);
   }
 
   postIt(purl, postdata) {
@@ -187,6 +263,9 @@ export class AccountSetupPage {
         sender: "me"
       });
       this.content.scrollToBottom(200);
+    } 
+    else if(input == "No" || input == "no" ){
+      this.navigateAway("accountOpen");
     }
     else {
       this.messages.push({
@@ -213,7 +292,7 @@ export class AccountSetupPage {
           this.content.scrollToBottom(200);
           this.uploadSelfie = true;
         }
-        else if(response.result.fulfillment.speech.indexOf('Congratulations') >= 0){
+        else if(response.result.fulfillment.speech.indexOf('set up your account') >= 0){
           this.navigateAway();
          }
         else {
@@ -244,9 +323,12 @@ export class AccountSetupPage {
         });
       }
       
-      else if(response.result.fulfillment.speech.indexOf('Congratulations') >= 0){
-        this.navigateAway();
+      else if(response.result.fulfillment.speech.indexOf('set up your account') >= 0){
+       // this.navigateAway();
        }
+       else if(response.result.fulfillment.speech.indexOf('Sorry') >= 0){
+        
+      }
       else {
         this.tts.speak({
           text:response.result.fulfillment.speech,
@@ -260,8 +342,60 @@ export class AccountSetupPage {
     })
   }
 
-  navigateAway(){
-    this.navCtrl.setRoot(CongratulatePage);
+  navigateAway(address?: string, ){
+    if(address != undefined || address === "accountOpen"){
+      this.navCtrl.push(AccountOpenPage);
+    }
+    else {
+
+      this.tts.speak({
+        text:"Great! Please give me few seconds while we set up your account",
+        locale: "en-US",
+        rate: 1
+      });
+
+      this.ngZone.run(()=>{   
+        this.messages.push({
+          text: "Great! Please give me few seconds while we set up your account",
+          sender: "api"
+        });
+        this.content.scrollToBottom(200);
+        let url = "http://10.236.128.48/AccountOpening/api/Account/NewAccountOpen"
+        let headers = new Headers(
+          {
+            'Content-Type' : 'application/json'
+          });
+          let options = new RequestOptions({ headers: headers });
+          
+          let data = JSON.stringify({
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email:"Soumitra.Saha@gmail.com",
+            phone:"9980573006",
+            dob:"1982-09-17",
+            homeAddress:"30 Park St, Boston, MA 02108",
+            ssn:"123456789",
+            account:"brokerage",
+            type:"individual"
+          });
+          
+         
+          this.http.post(url,data,options).subscribe( res => {
+            let AccountDetails= res.json();
+
+            setTimeout(()=>{
+              this.navCtrl.push(CongratulatePage,{accountNumber:AccountDetails.AccountNumber});
+            },2000);
+
+          },
+        err => {
+          this.navCtrl.push(CongratulatePage,{accountNumber:'618208013'});
+        })
+        
+      })
+
+     
+    }
   }
 
   sendVoice(){
@@ -290,9 +424,15 @@ export class AccountSetupPage {
           rate: 1
         });
       }
-      else if(response.result.fulfillment.speech.indexOf('Congratulations') >= 0){
+      else if(response.result.fulfillment.speech.indexOf('set up your account') >= 0){
        this.navigateAway();
       }
+      else if(response.result.resolvedQuery == 'No' || response.result.resolvedQuery == 'no'){
+        this.navigateAway("accountOpen");
+       }
+       else if(response.result.fulfillment.speech.indexOf('Sorry') >= 0){
+        
+       }
       else{
         this.tts.speak({
           text:response.result.fulfillment.speech,
@@ -314,8 +454,11 @@ export class AccountSetupPage {
           this.uploadPicture = false;
           this.uploadSelfie = true;
         }
-        else if(response.result.fulfillment.speech.indexOf('Congratulations') >= 0){
-          this.navigateAway();
+        else if(response.result.fulfillment.speech.indexOf('set up your account') >= 0){
+         // this.navigateAway();
+         }
+         else if(response.result.resolvedQuery == 'No' || response.result.resolvedQuery== 'no'){
+          this.navigateAway("accountOpen");
          }
         else{
           this.uploadPicture = false;
