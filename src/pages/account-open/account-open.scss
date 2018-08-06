@@ -1,0 +1,38 @@
+page-account-open {
+
+}
+
+.attributes {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .attributes td, .attributes th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .attributes tr:nth-child(odd){ 
+    background-color: cornsilk;
+  }   
+  
+  .attributes tr:nth-child(even){ 
+    background-color: lavender;
+  }
+
+//   .attributes tr:hover {
+//     background-color:  rgb(219, 241, 178);
+//   }
+
+  .attributes th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: gray;
+    color: white;
+  }
+
+  .attributes tr {
+    text-align: left;
+    color: black;
+  }

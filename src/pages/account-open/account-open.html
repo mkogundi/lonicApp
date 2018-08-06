@@ -1,0 +1,166 @@
+<!--
+  Generated template for the AccountOpenPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='navbarColor'>
+    <ion-title>Account Opening</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-image: url('../assets/imgs/backgroundRed.jpg'); background-size: 100%" >
+
+<ion-slides>
+  <ion-slide>
+      <form style="margin-top: -20%; opacity: 0.8; width: 90%; margin-left:5%;" id="form1">
+      <div style="color: white; font-weight: bold;">Personal Details</div> <br/>
+      <ion-item>
+      <!--<ion-label style="color: black;">First Name</ion-label>-->
+      <ion-input type="text" name="firstName" id="firstName" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}"
+      placeholder="First Name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+      <!--<ion-label style="color: black;">Last Name</ion-label>-->
+      <ion-input type="text" name="lastname" id="lastname" [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}" style="text-align: right"
+      placeholder="Last Name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+      <!--<ion-label style="color: black;">Email</ion-label>-->
+      <ion-input type="text" name="email" id="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"
+      placeholder="Email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+      <!--<ion-label styl="color: black;">SSN</ion-label>-->
+      <ion-input type="text" name="ssn" id="ssn" [(ngModel)]="ssn" [ngModelOptions]="{standalone: true}"
+      placeholder="SSN"></ion-input>
+      </ion-item>
+
+      <ion-item>
+      <!--<ion-label style="color: black;">Date of Birth</ion-label>-->
+      <ion-datetime displayFormat="DD/MM/YYYY" name="dob" id="dob" [(ngModel)]="dob" [ngModelOptions]="{standalone: true}"
+      placeholder="Date of Birth" style="margin-left: -5% "></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+      <!--<ion-label style="color: black;">Phone</ion-label>-->
+      <ion-input type="text" name="phone" id="phone" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}"
+      placeholder="Phone"></ion-input>
+      </ion-item>
+      <br />
+      <button ion-button round (click)="next()">Next</button>
+      </form>
+  </ion-slide>
+
+  <ion-slide>
+      <form style="margin-top: 0%; opacity: 0.8; width: 90%; margin-left:5%; border-radius: 10px;" id="form2">
+      <div style="color: white; font-weight: bold;">Address Details</div><br/>
+      <ion-item>
+      <!--<ion-label style="color: black;">Country</ion-label>-->
+      <ion-select [(ngModel)]="country" [ngModelOptions]="{standalone: true}" placeholder="Country" style="margin-left: -5%">
+        <ion-option value="USA">USA</ion-option>
+        <ion-option value="Canada">Canada</ion-option>
+      </ion-select>
+      </ion-item>
+
+      <ion-item>
+      <!--<ion-label style="color: black;">Address Line 1</ion-label>-->
+      <ion-input type="text" id="addr1" [(ngModel)]="addr1" [ngModelOptions]="{standalone: true}"
+      placeholder="Address Line 1"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+      <!--<ion-label style="color: black;">Address Line 2</ion-label>-->
+      <ion-input type="text" id="addr2" [(ngModel)]="addr2" [ngModelOptions]="{standalone: true}"
+      placeholder="Address Line 2"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+      <!--<ion-label style="color: black;">City</ion-label>-->
+      <ion-input type="text" id="city" [(ngModel)]="city" [ngModelOptions]="{standalone: true}"
+      placeholder="City"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+      <ion-label style="color: grey" *ngIf="!(country=='USA' || country=='Canada')">State</ion-label>
+
+      <ion-select  id="state" [(ngModel)]="state" [ngModelOptions]="{standalone: true}" *ngIf="country=='USA'" placeholder="State" style="margin-left:-5%; min-width:100%">
+        <ion-option *ngFor="let state of usStatesNames" value="{{state}}">{{state}}</ion-option>
+      </ion-select>
+
+      <ion-select id="state" [(ngModel)]="state" [ngModelOptions]="{standalone: true}" *ngIf="country=='Canada'" placeholder="State" style="margin-left:-5%; min-width:100%">
+        <ion-option *ngFor="let state of canadaStatesNames" value="{{state}}">{{state}}</ion-option>
+      </ion-select>
+      </ion-item>
+
+      <ion-item>
+      <!--<ion-label style="color: black;">Zip</ion-label>-->
+      <ion-input type="text" id="zip" [(ngModel)]="zip" [ngModelOptions]="{standalone: true}"
+      placeholder="Zip"></ion-input>
+      </ion-item>
+      <br/>
+      <button ion-button round (click)="next()">Preview</button>
+      </form>
+  </ion-slide>
+  
+  <ion-slide>
+      <div style="color: white; font-weight: bold; font-size: 16pt">Summary</div> <br/>
+      <table class="attributes" style="width:90%; margin-left: 5%;">
+        
+          <tr>
+            <th>Attributes</th>
+            <th>Value</th>
+          </tr>
+          
+          <tr>
+            <td width="40%">First Name</td>
+            <td width="60%">{{firstName}}</td>
+          </tr>
+          <tr>
+            <td>Last Name</td>
+            <td>{{lastName}}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{{email}}</td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>{{phone}}</td>
+          </tr>
+          <tr>
+            <td>DOB</td>
+            <td>{{dob}}</td>
+          </tr>
+          <tr>
+            <td>Home Address</td>
+            <td>{{addr1}} {{addr2}}</td>
+          </tr>
+          <tr>
+            <td>SSN</td>
+            <td>{{ssn}}</td>
+          </tr>
+          <tr>
+            <td>Account</td>
+            <td>Brokerage</td>
+          </tr>
+          <tr>
+            <td>Type</td>
+            <td>Individual</td>
+          </tr>
+        </table>
+
+        <br/>
+        <button ion-button round (click)="editInfo()">Edit</button>
+        <button ion-button round (click)="navigateAway()">Looks Good</button>
+  </ion-slide>
+</ion-slides>
+
+</ion-content>
