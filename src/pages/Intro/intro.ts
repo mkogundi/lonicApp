@@ -1,10 +1,11 @@
 import { Component, ViewChild, trigger, transition, style, state, animate, keyframes } from '@angular/core';
-import { IonicPage, NavController, NavParams ,Slides, Platform} from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,Slides, Platform, Events} from 'ionic-angular';
 import { AccountSetupPage } from '../account-setup/account-setup';
 import { FingerprintAIO , FingerprintOptions} from '@ionic-native/fingerprint-aio'
 import { ListPage } from '../list/list';
 import { CongratulatePage } from '../congratulate/congratulate';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { HomePage } from '../home/home';
 /**
  * Generated class for the IntroPage page.
  *
@@ -39,7 +40,7 @@ export class IntroPage {
 
   fingerprintOptions: FingerprintOptions;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private platform: Platform,private fingerprint: FingerprintAIO,private googlePlus: GooglePlus) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private platform: Platform,private fingerprint: FingerprintAIO,private googlePlus: GooglePlus,public events:Events) {
     this.fingerprintOptions = {
       clientId: 'IonicAI',
       clientSecret: 'password',
@@ -94,12 +95,14 @@ export class IntroPage {
       'offline': true
     })
       .then((res) =>{ 
-        alert(res);
-        console.log(res);
+       // alert(res);
+       // console.log(res);
+        this.events.publish('user:created',res);
+        this.navCtrl.setRoot(HomePage,{data:res})
       } )
       .catch((err) =>{ 
-        console.error(err);
-         alert("blah"); 
+      //  console.error(err);
+       //  alert("blah"); 
         });
   }
 

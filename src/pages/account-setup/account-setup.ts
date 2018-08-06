@@ -83,6 +83,7 @@ export class AccountSetupPage {
   takePicture(){
     this.content.scrollToBottom(200);
     let options = {
+      destinationType:this.camera.DestinationType.DATA_URL,
       targetWidth: 300,
       targetHeight: 300,
       quality: 100,
@@ -95,7 +96,31 @@ export class AccountSetupPage {
      // console.log(imageData);
      const currentName = imageData.replace(/^.*[\\\/]/,'');
      const path = imageData.replace(/[^\/]*$/,'');
-     this.file.moveFile(path,currentName,cordova.file.externalRootDirectory,currentName)
+
+     this.base64Image = "data:image/jpeg;base64,"+imageData;
+     setTimeout(()=>{
+       this.uploadPicture = false;
+       this.messages.push({
+         text: "I am retrieving your personal information",
+         sender: "api"
+       });
+       this.tts.speak({
+         text:"I am retrieving your personal information",
+         locale: "en-US",
+         rate: 1
+       });
+     },2000)
+     //this.callApiForDriverDetails();
+     // alert(imageData);
+     
+     this.http.get('base64Data.txt').subscribe(data => {
+       var formData = new FormData()
+       formData.append('image',data.text());
+
+       this.postIt(this.licenseUrl,formData);
+     })  
+
+     /* this.file.moveFile(path,currentName,cordova.file.externalRootDirectory,currentName)
      .then(
        data => {
         console.log(cordova.file.externalRootDirectory);
@@ -104,6 +129,8 @@ export class AccountSetupPage {
         console.log(new_path);
         var formData = new FormData();
 
+      
+
         setTimeout(()=>{
           formData.append('url', "https://wabr.inliteresearch.com/SampleImages/1d.pdf");
           this.postIt(this.licenseUrl, formData); 
@@ -111,9 +138,9 @@ export class AccountSetupPage {
 
        
 
-        var reader = new FileReader();
+       // var reader = new FileReader();
   
-          /*   reader.onload = (event: ProgressEvent) => {
+            reader.onload = (event: ProgressEvent) => {
               this.base64 = (<FileReader>event.target).result;
               console.log(this.base64);
               var formData = new FormData();
@@ -121,9 +148,9 @@ export class AccountSetupPage {
              this.postIt(this.licenseUrl, formData); 
             }
         
-            reader.readAsDataURL(data); */
+            reader.readAsDataURL(data);
 
-       /*  this.file.readAsArrayBuffer(cordova.file.dataDirectory, currentName).then( 
+        this.file.readAsArrayBuffer(cordova.file.dataDirectory, currentName).then( 
           (res) =>{
             let blob = new Blob([res], {type: "image/jpeg"});
             var reader = new FileReader();
@@ -138,11 +165,11 @@ export class AccountSetupPage {
         
             reader.readAsDataURL(blob);
            
-          }) */
+          })
       
 
        
-        /*  this.file.readAsDataURL(cordova.file.dataDirectory,currentName)
+         this.file.readAsDataURL(cordova.file.dataDirectory,currentName)
          .then(
            file64 => {
              console.log(file64);
@@ -151,37 +178,16 @@ export class AccountSetupPage {
              formData.append('image', file64);
              this.postIt(this.licenseUrl, formData);
            }
-         ) */
+         )
        }
      )
      .catch(
        err =>{
          alert("couldnt save the image");
        }
-     )
-      this.imageUrl = imageData;
-     // this.base64Image = "data:image/jpeg;base64,"+imageData;
-      setTimeout(()=>{
-        this.uploadPicture = false;
-        this.messages.push({
-          text: "I am retrieving your personal information",
-          sender: "api"
-        });
-        this.tts.speak({
-          text:"I am retrieving your personal information",
-          locale: "en-US",
-          rate: 1
-        });
-      },2000)
-      //this.callApiForDriverDetails();
-     // alert(imageData);
-     
-     /*  this.http.get('base64Data.txt').subscribe(data => {
-        var formData = new FormData()
-        formData.append('image',data.text());
-
-        this.postIt(this.licenseUrl,formData);
-      }) */
+     ) */
+     // this.imageUrl = imageData;
+      
       
      /*  var formData = new FormData();
       formData.append('image',imageData);

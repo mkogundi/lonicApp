@@ -201,44 +201,27 @@ export class OrderEntryPage {
           const result = await this.fingerprint.show(this.fingerprintOptions);
           if (result != ''){
 
+            
            
-            let url = "https://INDV920121:8443/createOrder"
+            let url = "http://10.236.128.48/AccountOpening/api/Order/OEPlace"
             let headers = new Headers(
               {
                 'Content-Type' : 'application/json'
               });
               let options = new RequestOptions({ headers: headers });
               
-              let data = JSON.stringify({ "request":{
-                CL: "1",
-                format: "json",
-                reqType:"N",
-                acctNum:"X30000647",
-                baseOrderDetail:{
-                  secDetail:{
-                    symbol: "TSLA"
-                  },
-                  acctTypeCode:"C",
-                  orderAction:"Buy",
-                  qty:"20",
-                  qtyTypeCode:"S"
-                },
-                tradableSecOrderDetail:{
-                  tifCode:"D",
-                  priceTypeDetail:{
-                    priceTypeCode:"M"
-                  }
-                } 
-              }
+              let data = JSON.stringify({
+                Qty: "20",
+                Symbol: "TSLA",
+                action:"BUY",
+                AccountNumber:"105955704"
             });
               
-             
+        
               this.http.post(url,data,options).subscribe( res => {
                 let orderNumber= res.json();
-        
-                setTimeout(()=>{
-                  this.navCtrl.push(CongratulatePage,{orderNumber:orderNumber.orderConfirmDetail.confNum,data:'orderplaced'});
-                },2000);
+
+                this.navCtrl.push(CongratulatePage,{orderNumber:orderNumber.OrderNumber,data:'orderplaced'});
 
                 this.tts.speak({
                   text:"Your Order has been placed successfully",

@@ -13,14 +13,55 @@
 </ion-header>
 <ion-content *ngIf="screen=='mode'">
 
-  <ion-item>
-    <ion-label>Mode</ion-label>
+ 
+    <!--<ion-label>Mode</ion-label>
     <ion-select  interface="action-sheet" style="    min-width: 60%;" [placeholder]='mode' [(ngModel)]="mode">
 
       <ion-option value="cdcard">Credit/Debit Card</ion-option>
       <ion-option value="netbanking">Net Banking</ion-option>
-    </ion-select>
-  </ion-item>
+    </ion-select>-->
+    
+    <ion-item >
+      <ion-grid>
+        <ion-row>
+          <ion-col (click)="netbanking()" class="card" >
+            <div style=" text-align: -webkit-center;  display: grid;  ">
+              <img style=" width: 40px; height: 40px; " src="assets/imgs/bank.png" />
+              <strong > Bank Wire </strong>
+            </div>
+          </ion-col>
+          <ion-col  (click)="cdcard()" class="card" >
+              <div style=" text-align: -webkit-center;  display: grid;  ">
+              <img style=" width: 40px; height: 40px; " src="assets/imgs/card.png" />
+              <strong > Credit/Debit Card </strong>
+              </div>  
+          </ion-col>
+        
+        </ion-row>
+        <ion-row>
+            <ion-col class="card" >
+                <div style=" text-align: -webkit-center;  display: grid;  ">
+                <img style=" width: 40px; height: 40px; " src="assets/imgs/paypal.png" />
+                <strong > Paypal </strong>
+                </div>
+            </ion-col>
+            <ion-col class="card" >
+              <div style=" text-align: -webkit-center;  display: grid;  ">
+              <img style=" width: 40px; height: 40px; " src="assets/imgs/applepay.png" />
+              <strong> Apple Pay  </strong>
+              </div>
+          </ion-col>
+          <ion-col class="card" >
+              <div style=" text-align: -webkit-center;  display: grid;  ">
+              <img style=" width: 40px; height: 40px; " src="assets/imgs/gpay.png" />
+              <strong > Google Pay  </strong>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      </ion-item>
+
   <ion-item *ngIf="mode=='cdcard'"> 
     <ion-input (ionChange)=cardtype($event);   type="number" placeholder="CARD NUMBER">
     </ion-input>
@@ -78,19 +119,6 @@
     <ion-input type="text" placeholder="NAME ON CARD"></ion-input>
   </ion-item>
 
-  <ion-item *ngIf="mode=='netbanking'">
-    <ion-label style="    text-align: center;">Choose a Bank</ion-label>
-    <!--<ion-select [placeholder]='"Banks"' [(ngModel)]="bank">
-
-      <ion-option value="01">Bank Of America</ion-option>
-      <ion-option value="02">Citi Bank</ion-option>
-      <ion-option value="03">JP Morgan</ion-option>
-      <ion-option value="04">Wells Fargo</ion-option>
-      <ion-option value="05">Goldman Sachs</ion-option>
-      <ion-option value="06">Morgan Stanley</ion-option>
-
-    </ion-select>-->
-  </ion-item>
   <!--
   <ion-item *ngIf="mode=='netbanking'">
 
@@ -112,9 +140,10 @@
   </ion-item>
 
 <ion-item *ngIf="mode=='PIN'">
-  <ion-label text-wrap style="  font-size: small; font-weight: 100;">
+  <div style="text-align: center" >
+  <p text-wrap style="font-size: small; font-weight: 100;">
       By clicking on 'Proceed' you confirm that you authorize us to debit $1/Month from your account.
-  </ion-label>
+  </p></div>
 </ion-item>
   <ion-item *ngIf="mode=='cdcard'">
     <button (click)="onCancelClick()" ion-button color="light">Cancel</button>
@@ -133,71 +162,78 @@
     <button (click)="thanksmsg()" ion-button color="secondary">Proceed</button>
   </ion-item>
 
+ <ion-item *ngIf="mode=='netbanking'">
+    
+      <div style="text-align: center">
+        <!-- <img  (click)="onCancelClick()" style=" width: 30px; height: 30px; " src="assets/icon/leftarrow.png" />-->
+         <strong> Choose a Bank</strong>
+       </div>
+       </ion-item>
 
   <ion-grid *ngIf="mode=='netbanking'">
     <ion-row>
-      <ion-col>
+      <ion-col  class="card">
         <div (click)="onBOAClick()" class="image-container">
           <img src="assets/imgs/boalogo1.jpg" />
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col  class="card">
         <div (click)="onCitiClick()" class="image-container">
           <img src="assets/imgs/cititile.png" />
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/jpmgtile.png" />
         </div>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/morganstile.png" />
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/goldstile2.png" />
         </div>
-      </ion-col>
-      <ion-col>
+      </ion-col >
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/wftile.png" />
         </div>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/bny.jpg" />
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/tdbanktile.jpg" />
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/usaa.png" />
         </div>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/usbank.png" />
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/pnctile.jpg" />
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col  class="card">
         <div class="image-container">
           <img src="assets/imgs/capitalone.jpg" />
         </div>
@@ -206,10 +242,13 @@
   </ion-grid>
 </ion-content>
 
-<ion-content *ngIf="screen=='BOA'">
+
+
+
+<ion-content style="background-color: #dc1431;" *ngIf="screen=='BOA'">
 
   <div id="BOALogin" *ngIf="BOALoginvisible" class="item-container item-container-bot">
-    <div style="  position: absolute; top: 15%; text-align: center;padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+    <div style=" /* position: absolute; top: 15%;*/ margin: auto; margin-top: 30%; text-align: center;padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
       class=" item talk-bot left-guess">
       <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;" src="assets/imgs/boa-logo-svg.svg">
       <div style=" background-color: #dc1431;">
@@ -233,7 +272,7 @@
     </div>
   </div>
   <div id="tansferboa" *ngIf="BOAlinkvisible" class="item-container item-container-bot">
-    <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+    <div style="  /* position: absolute; top: 15%; */ text-align: center ;margin: auto; margin-top: 30%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
       class="item talk-bot left-guess">
       <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;"
         src="assets/imgs/boa-logo-svg.svg">
@@ -265,7 +304,7 @@
     </div>
   </div>
   <div id="tansferboa" *ngIf="BOApinvisible" class="item-container item-container-bot">
-      <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+      <div style=" text-align: center ; /* position: absolute; top: 15%; */ margin: auto; margin-top: 30%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
         class="item talk-bot left-guess">
         <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;"
           src="assets/imgs/boa-logo-svg.svg">
@@ -298,9 +337,13 @@
 
 
 </ion-content>
-<ion-content *ngIf="screen=='CITI'">
+
+
+
+<ion-content style="background: linear-gradient(180deg,#00bdf2,#00b3f0 18%,#0066b3 77%,#004985);
+" *ngIf="screen=='CITI'">
     <div id="BOALogin" *ngIf="CITILoginvisible" class="item-container item-container-bot">
-        <div style="  position: absolute; top: 15%; text-align: center;padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+        <div style=" /* position: absolute; top: 15%;*/ margin: auto; margin-top: 30%; text-align: center;padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
           class=" item talk-bot left-guess">
           <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;" src="assets/imgs/citibank.png">
           <div style=" background: linear-gradient(180deg,#00bdf2,#00b3f0 18%,#0066b3 77%,#004985);">
@@ -324,7 +367,7 @@
         </div>
       </div>
       <div id="tansferboa" *ngIf="CITIlinkvisible" class="item-container item-container-bot">
-        <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+        <div style=" text-align: center ; /*position: absolute; top: 15%;*/ margin: auto; margin-top: 30%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
           class="item talk-bot left-guess">
           <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;"
           src="assets/imgs/citibank.png">
@@ -356,7 +399,7 @@
         </div>
       </div>
       <div id="tansferboa" *ngIf="CITIpinvisible" class="item-container item-container-bot">
-          <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
+          <div style=" text-align: center ; /*position: absolute; top: 15%;*/margin: auto; margin-top: 30%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;"
             class="item talk-bot left-guess">
             <img id="boa" style="/* width: 318px; *//* height: 55px; *//* width: 417px; */height: 101.125; padding-bottom: 10px;"
             src="assets/imgs/citibank.png">
@@ -387,6 +430,8 @@
           </div>
         </div>
 </ion-content>
+
+
 <ion-content *ngIf="screen=='thanks'">
     <div style=" text-align: center ; position: absolute; top: 15%; padding: 10px;border-radius: 0;background-color: #ffffff;width: 300px;" class="row green">
         <img      style="width: 25px; height: 25px;"   src="assets/imgs/tick.png">
@@ -400,56 +445,40 @@
         </div>    
    
   </ion-content>
-<!--
 
-    <div class="debCreditcard paymentform" id="paymentform-1">
-      <div class="creditdebit-form"><div class="form-field econtainer"> 
-        <input type="tel" placeholder="Card number" class="card-icon card-number" 
-        id="card-number" name="card-number" maxlength="19">
-        <span class="card-img" id="cardIcon"></span>
-        <div class="validations-error"></div></div>
-        <div class="form-field clearfix"><div class="ion-select-box exp-month econtainer">
-           <ion-select class="card-month" id="card-month" name="card-month">
-             <ion-option value="" disabled="" ion-selected="">Month</ion-option>
-             <ion-option value="01">01</ion-option><ion-option value="02">02</ion-option>
-             <ion-option value="03">03</ion-option><ion-option value="04">04</ion-option>
-             <ion-option value="05">05</ion-option><ion-option value="06">06</ion-option>
-             <ion-option value="07">07</ion-option><ion-option value="08">08</ion-option>
-             <ion-option value="09">09</ion-option><ion-option value="10">10</ion-option>
-             <ion-option value="11">11</ion-option><ion-option value="12">12</ion-option></ion-select>
-             <div class="validations-error"></div></div><div class="ion-select-box exp-year econtainer"> 
-               <ion-select class="card-year" id="card-year" name="card-year"><ion-option value="" disabled="" 
-                ion-selected="">Year</ion-option>
-                 <ion-option value="2015">2015</ion-option><ion-option value="2016">2016</ion-option>
-                 <ion-option value="2017">2017</ion-option><ion-option value="2018">2018</ion-option>
-                 <ion-option value="2019">2019</ion-option><ion-option value="2020">2020</ion-option>
-                 <ion-option value="2021">2021</ion-option><ion-option value="2022">2022</ion-option>
-                 <ion-option value="2023">2023</ion-option><ion-option value="2024">2024</ion-option>
-                 <ion-option value="2025">2025</ion-option><ion-option value="2026">2026</ion-option>
-                 <ion-option value="2027">2027</ion-option><ion-option value="2028">2028</ion-option>
-                 <ion-option value="2029">2029</ion-option><ion-option value="2030">2030</ion-option>
-                 <ion-option value="2031">2031</ion-option><ion-option value="2032">2032</ion-option>
-                 <ion-option value="2033">2033</ion-option><ion-option value="2034">2034</ion-option>
-                 <ion-option value="2035">2035</ion-option><ion-option value="2036">2036</ion-option>
-                 <ion-option value="2037">2037</ion-option><ion-option value="2038">2038</ion-option><ion-option value="2039">2039</ion-option><ion-option value="2040">2040</ion-option><ion-option value="2041">2041</ion-option><ion-option value="2042">2042</ion-option><ion-option value="2043">2043</ion-option><ion-option value="2044">2044</ion-option><ion-option value="2045">2045</ion-option><ion-option value="2046">2046</ion-option><ion-option value="2047">2047</ion-option><ion-option value="2048">2048</ion-option><ion-option value="2048">2049</ion-option><ion-option value="2048">2050</ion-option></ion-select>
-                 
-                 
-                 <div class="validations-error"></div>
-                </div>
-                 <div class="ion-select-box card-vendor econtainer" 
-                 > <ion-select class="card-vendor" id="card-vendor" name="card-vendor">
-                   <ion-option value="" disabled="" ion-selected="">Card Type</ion-option><ion-option value="visa">Visa</ion-option>
-                   <ion-option value="master">Master</ion-option><ion-option value="maestro">Maestro</ion-option>
-                   <ion-option value="rupay">Rupay</ion-option><ion-option value="amex">AMEX</ion-option>
-                   <ion-option value="diners">Diners</ion-option></ion-select><div class="validations-error"></div></div>
-                   <div class="econtainer cvv-container"> 
-                   <input type="password" maxlength="4" placeholder="CVV" class="cvv card-cvv"
-                    id="card-cvv" name="card-cvv"><div class="validations-error">
 
-                    </div></div></div></div></div>
-                    <div class="action-buttons" 
-                    id="addCashActionBtns" style="margin-top: 50px;">
-
-                    
-                    <div class="btn make-payment">Proceed</div>
-                    <div class="btn grey cancel go-home">Cancel</div></div>-->
+    <!--    
+          <div (click)="netbanking()" style="display: flex" >
+        <img style=" width: 40px; height: 40px; " src="assets/icon/bank.png" />
+        <strong style="padding-top: 12px;padding-left: 10px; width: 75%;  " > Bank Wire </strong>
+        <img style=" width: 40px; height: 40px; " src="assets/icon/rarrow.png" />
+      </div> 
+      <ion-item *ngIf="mode==''">
+          <div (click)="cdcard()"   style="display: flex" >
+              <img style=" width: 40px; height: 40px; " src="assets/icon/card.png" />
+              <strong style="padding-top: 12px;padding-left: 10px; width: 75%;" > Credit/Debit Card  </strong>
+              <img style=" width: 40px; height: 40px; " src="assets/icon/rarrow.png" />
+            </div> 
+      </ion-item>
+      <ion-item *ngIf="mode==''">
+          <div  style="display: flex" >
+              <img style=" width: 40px; height: 40px; " src="assets/icon/paypal.png" />
+              <strong style="padding-top: 12px;padding-left: 10px; width: 75%;"> PayPal </strong>
+              <img style=" width: 40px; height: 40px; " src="assets/icon/rarrow.png" />
+            </div> 
+        </ion-item>
+        <ion-item *ngIf="mode==''">
+            <div  style="display: flex" >
+                <img style=" width: 40px; height: 40px; " src="assets/icon/applepay.png" />
+                <strong style="padding-top: 12px;padding-left: 10px; width: 75%;"> Apple Pay  </strong>
+                <img style=" width: 40px; height: 40px; " src="assets/icon/rarrow.png" />
+              </div> 
+          </ion-item>
+          <ion-item *ngIf="mode==''">
+              <div  style="display: flex" >
+                  <img style=" width: 40px; height: 40px; " src="assets/icon/gpay.png" />
+                  <strong style="padding-top: 12px;padding-left: 10px; width: 75%;"> Google Pay  </strong>
+                  <img style=" width: 40px; height: 40px; " src="assets/icon/rarrow.png" />
+                </div> 
+            </ion-item>
+          -->

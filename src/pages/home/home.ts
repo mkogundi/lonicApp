@@ -1,5 +1,5 @@
 import { Component,NgZone} from '@angular/core';
-import { NavController,Content } from 'ionic-angular';
+import { NavController,Content, Events, NavParams } from 'ionic-angular';
 
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 
@@ -13,12 +13,15 @@ export class HomePage{
 
   messages: any[]= [];
   text: string = "";
-  constructor(public navCtrl: NavController,public ngZone: NgZone,public tts:TextToSpeech) {
+  userName;
+  constructor(public navCtrl: NavController,public navParams: NavParams,public ngZone: NgZone,public tts:TextToSpeech,public events:Events) {
 
      this.messages.push({
       text: "<h3>Hi, how can i help you?</h3>",
       sender: "api"
     }); 
+
+    this.userName = navParams.get('data').givenName;
     
   }
 

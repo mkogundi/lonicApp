@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CongratulatePage } from '../congratulate/congratulate';
 
-
-
 @Component({
   selector: 'page-list',
   templateUrl: 'link.html'
@@ -18,7 +16,7 @@ export class LinkPage {
   CITIpinvisible = false;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
-  mode;
+  mode ='';
   screen = 'mode';
 
   public onProceedClick() {
@@ -36,7 +34,13 @@ export class LinkPage {
    this.postIt(purl, formdata);*/
     //this.theInAppBrowser.create(url,target,this.options);
 }
-
+public netbanking(){
+  this.mode = 'netbanking';
+}
+public cdcard()
+{
+  this.mode = 'cdcard';
+}
 public onBOAClick()
 {
   this.screen = 'BOA';
@@ -75,7 +79,7 @@ public addBotCITISignin(){
   }
   public thanksmsg()
   {
-    this.screen = 'thanks'
+    this.screen = 'thanks';
     setTimeout(()=>{
       this.navCtrl.push(CongratulatePage,{
         data:'thanks'
@@ -85,7 +89,7 @@ public addBotCITISignin(){
   }
   public closenetbanking(){
     this.mode = 'netbanking';
-    console.log('fdfd');
+   
   }
  public closeing()
  {  

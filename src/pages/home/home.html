@@ -1,15 +1,14 @@
-<ion-header>
-  <ion-navbar color='navbarColor'>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Simplifid
-    </ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding style="background: url('assets/backgroundRed.jpg') no-repeat">
+<ion-content padding style="background: url('assets/backgroundRed.jpg') no-repeat" class="card-background-page">
+
+    <ion-card >
+      <img src="assets/imgs/invest.jpg" />
+      <!-- <ion-avatar item-start>
+          <img src="assets/harvey1.jpg" class="displayProfile">
+        </ion-avatar> -->
+      <div class="card-title">Hello {{ userName | titlecase}}</div>
+      <div class="card-subtitle">Welcome to SimpliFid</div>
+    </ion-card>
     <ion-list>
         <ion-item >
           <h3>S&P 500 heads for five straight weeks of gains</h3>
@@ -32,6 +31,12 @@
           <p>Samsung saw underwhelming growth in the second quarter.</p>
         </ion-item>
       </ion-list>
+      <ion-item>
+        <button ion-button outline block>Transfer Assets</button>
+      </ion-item>
+      <ion-item>
+          <button ion-button outline block>Order</button>
+        </ion-item>
 </ion-content>
 
 
