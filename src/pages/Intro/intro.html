@@ -1,6 +1,6 @@
 
 <ion-content style="background: url('assets/backgroundRed.jpg') no-repeat">
-    <ion-slides pager (ionSlideDidChange)="slideChanged()" (ionSlideDrag)="slideMoved()">
+    <ion-slides pager (ionSlideDidChange)="slideChanged()" (ionSlideDrag)="slideMoved()" autoplay="3000">
       <ion-slide>
         <div class="diag">
           <ion-icon ios="md-cash" md="md-cash" color="light" [@bounce]='state' (@bounce.done)="animationDone()"></ion-icon>
@@ -46,6 +46,17 @@
               <p color="light">Borrow money from fellow SimpliFid users at dirt-cheap interest rates</p>
             </div>
           </ion-slide>
+
+          <ion-slide>
+            <div [@bounce]='state'>
+              <!--   <iframe [src]="assets/Sample_Video.mp4" frameborder="0" allowfullscreen
+                width="640" height="550"
+            ></iframe> -->
+        
+                <video controls autoplay src="assets/Sample_Video.mp4"></video>
+            </div>
+          </ion-slide>
+
     </ion-slides>
     <button ion-button round (click)="skip()" id="skip">Create an Account</button> 
     <button ion-button round (click)="googleSignin()" id="gmaillogin">Login with Google</button> 

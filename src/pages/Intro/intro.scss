@@ -66,3 +66,13 @@ p {
     z-index: 5;
     width:70%;
 }
+
+video {
+    position: relative;
+    left: 49%;
+    top: 22%;
+    width: 400px;
+    height: 100%;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+}
