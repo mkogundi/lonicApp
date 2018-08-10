@@ -25,6 +25,9 @@ export class OrderEntryPage {
   messages: any[]= [];
   text: string = "";
   confirmOrder = false;
+  quantity;
+  action;
+  security;
   @ViewChild(Content) content: Content;
   @ViewChild('uploadPictureDiv', { read: ElementRef }) uploadPictureDiv:ElementRef;
   
@@ -156,15 +159,23 @@ export class OrderEntryPage {
           locale: "en-US",
           rate: 1
         });  
+
+        console.log(response.result.fulfillment.speech);
+
+        var str   = response.result.fulfillment.speech;
+        var stringArray = str.split(/(\s+)/);
+
+        this.quantity = parseFloat(stringArray[2]);
+        this.security = stringArray[4];
+        this.action = stringArray[0];
       }
       else if(response.result.fulfillment.speech.indexOf('market') >= 0 ||response.result.fulfillment.speech.indexOf('Market') >= 0  ){
         this.http.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=TSLA&interval=1min&apikey=X9EBN7HTIC5W6TE1').map(res => res.json()).subscribe(data => {
 
-          let Quantity = 20;
-          let action = "Buy";
+          let action = this.action;
           let timeKey = data["Meta Data"]["3. Last Refreshed"];
           let price = data["Time Series (1min)"][timeKey]["4. close"];
-          let totalAmount = parseFloat(price) * Quantity;
+          let totalAmount = parseFloat(price) * this.quantity;
           this.statement = "Please confirm order details below";
           this.tts.speak({
             text:this.statement,
@@ -211,15 +222,17 @@ export class OrderEntryPage {
               let options = new RequestOptions({ headers: headers });
               
               let data = JSON.stringify({
-                Qty: "20",
+                Qty: this.quantity,
                 Symbol: "TSLA",
-                action:"BUY",
-                AccountNumber:"105955704"
+                action:this.action,
+                AccountNumber:"122616971"
             });
               
         
               this.http.post(url,data,options).subscribe( res => {
                 let orderNumber= res.json();
+
+                console.log(orderNumber);
 
                 this.navCtrl.push(CongratulatePage,{orderNumber:orderNumber.OrderNumber,data:'orderplaced'});
 
